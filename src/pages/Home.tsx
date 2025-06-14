@@ -284,7 +284,7 @@ const Home = () => {
                     Lihat presentasi lengkap tentang Metode Dekomposisi LU Gauss dengan visualisasi interaktif dan animasi smooth
                   </p>
                   <motion.div 
-                    className="inline-flex items-center gap-3 bg-white text-blue-700 hover:bg-blue-50 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-transform shadow-lg"
+                    className="inline-flex items-center gap-3 bg-gray-800 text-white hover:bg-gray-900 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-all shadow-lg"
                     whileHover={{ boxShadow: "0 10px 30px rgba(0,0,0,0.3)" }}
                   >
                     Mulai Presentasi
@@ -328,7 +328,7 @@ const Home = () => {
                     Implementasi kode C++ lengkap untuk Metode Dekomposisi LU Gauss dengan demo interaktif dan grafik realtime
                   </p>
                   <motion.div 
-                    className="inline-flex items-center gap-3 bg-white text-orange-700 hover:bg-orange-50 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-transform shadow-lg"
+                    className="inline-flex items-center gap-3 bg-gray-800 text-white hover:bg-gray-900 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-all shadow-lg"
                     whileHover={{ boxShadow: "0 10px 30px rgba(0,0,0,0.3)" }}
                   >
                     Lihat Program

@@ -449,16 +449,16 @@ const Presentation = () => {
                     whileHover={{ rotate: 5 }}
                   >
                     {index + 1}
-                    {/* Photo placeholder with upload indicator */}
                     <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <Camera className="w-8 h-8 text-white" />
                     </div>
                   </motion.div>
                   <h3 className="text-xl font-bold text-gray-800 mb-3">{member}</h3>
                   <div className="w-full h-28 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-500 text-sm hover:bg-gray-50 transition-colors duration-300 group-hover:border-blue-300">
-                    <Camera className="w-8 h-8 mb-2 opacity-50" />
-                    <span>Foto Mahasiswa</span>
-                    <span className="text-xs mt-1">Klik untuk upload</span>
+                    <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-2">
+                      <Users className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <span className="text-xs font-medium">Mahasiswa {index + 1}</span>
                   </div>
                   <motion.button
                     className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
@@ -471,25 +471,6 @@ const Presentation = () => {
                 </motion.div>
               ))}
             </div>
-            
-            {/* Photo Upload Instructions for Presentation */}
-            <motion.div 
-              className="mt-8 p-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl border-2 border-blue-200"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-            >
-              <h4 className="text-lg font-bold text-blue-800 mb-3 flex items-center gap-2">
-                <Camera className="w-5 h-5" />
-                Panduan Upload Foto untuk Presentasi:
-              </h4>
-              <ul className="text-gray-700 text-sm space-y-2">
-                <li>• Siapkan foto formal mahasiswa (rasio 1:1, minimal 300x300px)</li>
-                <li>• Format yang didukung: JPG, PNG (maksimal 5MB)</li>
-                <li>• Foto akan muncul di slide presentasi dan homepage</li>
-                <li>• Pastikan foto berkualitas tinggi untuk tampilan optimal</li>
-              </ul>
-            </motion.div>
           </div>
         );
 
