@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -223,6 +224,132 @@ const Presentation = () => {
 
   const getCurrentSlide = () => slides[currentSlide];
 
+  const renderSlideContent = (slide: any) => {
+    switch (slide.type) {
+      case 'cover':
+        return (
+          <div className="text-center space-y-8 min-h-[400px] flex flex-col justify-center">
+            <motion.h1 
+              className="text-3xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-700 via-purple-700 to-blue-900 bg-clip-text text-transparent leading-tight"
+              animate={{ 
+                scale: [1, 1.02, 1],
+                backgroundPosition: ['0%', '100%', '0%']
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              style={{ backgroundSize: '200% 100%' }}
+            >
+              {slide.title}
+            </motion.h1>
+            <motion.h2 
+              className="text-lg md:text-2xl lg:text-3xl text-gray-700 font-semibold"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              {slide.subtitle}
+            </motion.h2>
+            <motion.div 
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
+            >
+              <BookOpen className="w-6 h-6" />
+              {slide.content}
+            </motion.div>
+          </div>
+        );
+
+      case 'team':
+        return (
+          <div className="space-y-8">
+            <motion.h1 
+              className="text-2xl md:text-4xl font-bold text-center text-blue-800 mb-8"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Users className="inline w-8 h-8 mr-4" />
+              {slide.title}
+            </motion.h1>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {slide.content.map((member: string, index: number) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: index * 0.3, duration: 0.8, ease: "easeOut" }}
+                  className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl border-2 border-blue-100 hover:shadow-2xl transition-all duration-500 group"
+                  whileHover={{ scale: 1.05, y: -10 }}
+                >
+                  <motion.div 
+                    className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold shadow-2xl relative overflow-hidden group-hover:shadow-3xl transition-shadow duration-300"
+                    whileHover={{ rotate: 5 }}
+                  >
+                    {index + 1}
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">{member}</h3>
+                  <div className="w-full h-28 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-500 text-sm hover:bg-gray-50 transition-colors duration-300 group-hover:border-blue-300">
+                    <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-2">
+                      <Users className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <span className="text-xs font-medium">Placeholder Foto</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="space-y-6 min-h-[400px]">
+            <motion.h1 
+              className="text-2xl md:text-4xl font-bold text-blue-800 mb-6"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {slide.title}
+            </motion.h1>
+            
+            <motion.div 
+              className="text-lg md:text-xl text-gray-700 mb-6 font-medium"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              {slide.content}
+            </motion.div>
+
+            {slide.details && (
+              <motion.div 
+                className="space-y-4"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                {slide.details.map((detail: string, index: number) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 + index * 0.15, duration: 0.6 }}
+                    className="flex items-start space-x-3 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-blue-100"
+                    whileHover={{ x: 5 }}
+                  >
+                    <ArrowRight className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700 font-medium">{detail}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
       {/* Ultra Enhanced Animated Background */}
@@ -384,132 +511,6 @@ const Presentation = () => {
       </div>
     </div>
   );
-
-  function renderSlideContent(slide: any) {
-    switch (slide.type) {
-      case 'cover':
-        return (
-          <div className="text-center space-y-8 min-h-[400px] flex flex-col justify-center">
-            <motion.h1 
-              className="text-3xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-700 via-purple-700 to-blue-900 bg-clip-text text-transparent leading-tight"
-              animate={{ 
-                scale: [1, 1.02, 1],
-                backgroundPosition: ['0%', '100%', '0%']
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ backgroundSize: '200% 100%' }}
-            >
-              {slide.title}
-            </motion.h1>
-            <motion.h2 
-              className="text-lg md:text-2xl lg:text-3xl text-gray-700 font-semibold"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-            >
-              {slide.subtitle}
-            </motion.h2>
-            <motion.div 
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-            >
-              <BookOpen className="w-6 h-6" />
-              {slide.content}
-            </motion.div>
-          </div>
-        );
-
-      case 'team':
-        return (
-          <div className="space-y-8">
-            <motion.h1 
-              className="text-2xl md:text-4xl font-bold text-center text-blue-800 mb-8"
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <Users className="inline w-8 h-8 mr-4" />
-              {slide.title}
-            </motion.h1>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {slide.content.map((member: string, index: number) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: index * 0.3, duration: 0.8, ease: "easeOut" }}
-                  className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl border-2 border-blue-100 hover:shadow-2xl transition-all duration-500 group"
-                  whileHover={{ scale: 1.05, y: -10 }}
-                >
-                  <motion.div 
-                    className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold shadow-2xl relative overflow-hidden group-hover:shadow-3xl transition-shadow duration-300"
-                    whileHover={{ rotate: 5 }}
-                  >
-                    {index + 1}
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{member}</h3>
-                  <div className="w-full h-28 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-500 text-sm hover:bg-gray-50 transition-colors duration-300 group-hover:border-blue-300">
-                    <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-2">
-                      <Users className="w-8 h-8 text-gray-400" />
-                    </div>
-                    <span className="text-xs font-medium">Mahasiswa {index + 1}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        );
-
-      default:
-        return (
-          <div className="space-y-6 min-h-[400px]">
-            <motion.h1 
-              className="text-2xl md:text-4xl font-bold text-blue-800 mb-6"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              {slide.title}
-            </motion.h1>
-            
-            <motion.div 
-              className="text-lg md:text-xl text-gray-700 mb-6 font-medium"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              {slide.content}
-            </motion.div>
-
-            {slide.details && (
-              <motion.div 
-                className="space-y-4"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                {slide.details.map((detail: string, index: number) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.7 + index * 0.15, duration: 0.6 }}
-                    className="flex items-start space-x-3 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-blue-100"
-                    whileHover={{ x: 5 }}
-                  >
-                    <ArrowRight className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700 font-medium">{detail}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
-          </div>
-        );
-    }
-  }
 };
 
 export default Presentation;
