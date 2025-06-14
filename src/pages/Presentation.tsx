@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -507,7 +508,7 @@ const Presentation = () => {
             </Button>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
