@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Home, Users, Target, BookOpen, Zap, ArrowRight, ArrowDown, Play, Pause } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Home, Users, Target, BookOpen, Zap, ArrowRight, ArrowDown, Play, Pause, Camera, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Presentation = () => {
@@ -21,9 +21,9 @@ const Presentation = () => {
       id: 2,
       title: "Anggota Kelompok",
       content: [
-        "1. Anggota Kelompok 1 - Leader",
-        "2. Anggota Kelompok 2 - Developer", 
-        "3. Anggota Kelompok 3 - Analyst"
+        "1. Anggota Kelompok 1 - Leader (NIM: 12345678)",
+        "2. Anggota Kelompok 2 - Developer (NIM: 12345679)", 
+        "3. Anggota Kelompok 3 - Analyst (NIM: 12345680)"
       ],
       type: "team"
     },
@@ -204,7 +204,7 @@ const Presentation = () => {
     if (isAutoPlay) {
       interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 5000);
+      }, 7000); // Increased duration for smoother experience
     }
     return () => clearInterval(interval);
   }, [isAutoPlay, slides.length]);
@@ -224,65 +224,105 @@ const Presentation = () => {
   const getCurrentSlide = () => slides[currentSlide];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 relative overflow-hidden">
-      {/* Enhanced Animated Background */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+      {/* Ultra Enhanced Animated Background */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0"
           animate={{
             background: [
-              'radial-gradient(circle at 20% 80%, rgba(30, 64, 175, 0.3) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%)',
-              'radial-gradient(circle at 40% 40%, rgba(96, 165, 250, 0.3) 0%, transparent 50%)'
+              'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 60%)',
+              'radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.2) 0%, transparent 60%)',
+              'radial-gradient(circle at 40% 40%, rgba(34, 197, 94, 0.2) 0%, transparent 60%)',
+              'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 60%)'
             ]
           }}
-          transition={{ duration: 12, repeat: Infinity }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
+        
+        {/* Floating particles with smoother animations */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -150, 0],
+              x: [0, Math.sin(i) * 100, 0],
+              opacity: [0.3, 1, 0.3],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 15 + i * 2,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
       </div>
 
       {/* Enhanced Navigation Header */}
       <motion.div 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="relative z-20 p-4 bg-black/20 backdrop-blur-xl border-b border-white/20"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="relative z-20 p-4 bg-black/20 backdrop-blur-2xl border-b border-white/30"
       >
         <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-4">
           <Link to="/">
-            <Button variant="ghost" className="text-white hover:bg-white/20 font-medium">
-              <Home className="w-4 h-4 mr-2" />
-              Beranda
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button variant="ghost" className="text-white hover:bg-white/20 font-medium">
+                <Home className="w-4 h-4 mr-2" />
+                Beranda
+              </Button>
+            </motion.div>
           </Link>
           
           <div className="text-white text-center">
-            <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+            <motion.h1 
+              className="text-lg md:text-2xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent"
+              animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              style={{ backgroundSize: '200% 100%' }}
+            >
               Metode Dekomposisi LU Gauss
-            </h1>
+            </motion.h1>
             <p className="text-sm opacity-90">Slide {currentSlide + 1} dari {slides.length}</p>
           </div>
 
-          <Button 
-            onClick={() => setIsAutoPlay(!isAutoPlay)}
-            className={`font-medium ${isAutoPlay ? "bg-green-600 hover:bg-green-700" : "bg-blue-600 hover:bg-blue-700"}`}
-          >
-            {isAutoPlay ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
-            {isAutoPlay ? "Pause" : "Auto Play"}
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button 
+              onClick={() => setIsAutoPlay(!isAutoPlay)}
+              className={`font-medium transition-all duration-300 ${isAutoPlay ? "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700" : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"}`}
+            >
+              {isAutoPlay ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
+              {isAutoPlay ? "Pause" : "Auto Play"}
+            </Button>
+          </motion.div>
         </div>
       </motion.div>
 
-      {/* Enhanced Main Slide Content */}
+      {/* Ultra Enhanced Main Slide Content */}
       <div className="relative z-10 flex-1 flex items-center justify-center p-4 min-h-[calc(100vh-200px)]">
         <motion.div className="w-full max-w-6xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 0.95, rotateY: 20 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              exit={{ opacity: 0, scale: 0.95, rotateY: -20 }}
-              transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+              initial={{ opacity: 0, scale: 0.9, rotateY: 30, z: -100 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0, z: 0 }}
+              exit={{ opacity: 0, scale: 0.9, rotateY: -30, z: -100 }}
+              transition={{ 
+                duration: 0.8, 
+                type: "spring", 
+                stiffness: 100,
+                ease: "easeInOut"
+              }}
             >
-              <Card className="bg-white/95 backdrop-blur-xl border-2 border-blue-200/50 shadow-2xl min-h-[500px] md:min-h-[600px]">
+              <Card className="bg-white/95 backdrop-blur-2xl border-2 border-blue-200/50 shadow-2xl min-h-[500px] md:min-h-[600px] overflow-hidden">
                 <CardContent className="p-6 md:p-12">
                   {renderSlideContent(getCurrentSlide())}
                 </CardContent>
@@ -294,21 +334,24 @@ const Presentation = () => {
 
       {/* Enhanced Slide Navigation */}
       <motion.div 
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        className="relative z-20 p-4 bg-black/20 backdrop-blur-xl border-t border-white/20"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="relative z-20 p-4 bg-black/20 backdrop-blur-2xl border-t border-white/30"
       >
         <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-4">
-          <Button 
-            onClick={prevSlide} 
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium w-full md:w-auto"
-            disabled={currentSlide === 0}
-          >
-            <ChevronLeft className="w-4 h-4 mr-2" />
-            Sebelumnya
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button 
+              onClick={prevSlide} 
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium w-full md:w-auto transition-all duration-300"
+              disabled={currentSlide === 0}
+            >
+              <ChevronLeft className="w-4 h-4 mr-2" />
+              Sebelumnya
+            </Button>
+          </motion.div>
 
-          {/* Enhanced Slide Indicators */}
+          {/* Ultra Enhanced Slide Indicators */}
           <div className="flex space-x-2 overflow-x-auto max-w-full px-2">
             {slides.map((_, index) => (
               <motion.button
@@ -319,20 +362,24 @@ const Presentation = () => {
                     ? 'bg-white scale-125 shadow-lg' 
                     : 'bg-white/50 hover:bg-white/70'
                 }`}
-                whileHover={{ scale: 1.2 }}
+                whileHover={{ scale: 1.3 }}
                 whileTap={{ scale: 0.9 }}
+                animate={index === currentSlide ? { scale: [1.25, 1.4, 1.25] } : {}}
+                transition={{ duration: 2, repeat: Infinity }}
               />
             ))}
           </div>
 
-          <Button 
-            onClick={nextSlide} 
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium w-full md:w-auto"
-            disabled={currentSlide === slides.length - 1}
-          >
-            Selanjutnya
-            <ChevronRight className="w-4 h-4 ml-2" />
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button 
+              onClick={nextSlide} 
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium w-full md:w-auto transition-all duration-300"
+              disabled={currentSlide === slides.length - 1}
+            >
+              Selanjutnya
+              <ChevronRight className="w-4 h-4 ml-2" />
+            </Button>
+          </motion.div>
         </div>
       </motion.div>
     </div>
@@ -344,27 +391,32 @@ const Presentation = () => {
         return (
           <div className="text-center space-y-8 min-h-[400px] flex flex-col justify-center">
             <motion.h1 
-              className="text-3xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 bg-clip-text text-transparent leading-tight"
-              animate={{ scale: [1, 1.02, 1] }}
-              transition={{ duration: 3, repeat: Infinity }}
+              className="text-3xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-700 via-purple-700 to-blue-900 bg-clip-text text-transparent leading-tight"
+              animate={{ 
+                scale: [1, 1.02, 1],
+                backgroundPosition: ['0%', '100%', '0%']
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              style={{ backgroundSize: '200% 100%' }}
             >
               {slide.title}
             </motion.h1>
             <motion.h2 
               className="text-lg md:text-2xl lg:text-3xl text-gray-700 font-semibold"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
             >
               {slide.subtitle}
             </motion.h2>
             <motion.div 
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full font-bold text-lg shadow-lg"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
             >
-              <BookOpen className="w-5 h-5" />
+              <BookOpen className="w-6 h-6" />
               {slide.content}
             </motion.div>
           </div>
@@ -377,6 +429,7 @@ const Presentation = () => {
               className="text-2xl md:text-4xl font-bold text-center text-blue-800 mb-8"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
               <Users className="inline w-8 h-8 mr-4" />
               {slide.title}
@@ -385,21 +438,58 @@ const Presentation = () => {
               {slide.content.map((member: string, index: number) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.2 }}
-                  className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl border-2 border-blue-100 hover:shadow-2xl transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: index * 0.3, duration: 0.8, ease: "easeOut" }}
+                  className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl border-2 border-blue-100 hover:shadow-2xl transition-all duration-500 group"
+                  whileHover={{ scale: 1.05, y: -10 }}
                 >
-                  <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+                  <motion.div 
+                    className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold shadow-2xl relative overflow-hidden group-hover:shadow-3xl transition-shadow duration-300"
+                    whileHover={{ rotate: 5 }}
+                  >
                     {index + 1}
+                    {/* Photo placeholder with upload indicator */}
+                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Camera className="w-8 h-8 text-white" />
+                    </div>
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">{member}</h3>
+                  <div className="w-full h-28 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-500 text-sm hover:bg-gray-50 transition-colors duration-300 group-hover:border-blue-300">
+                    <Camera className="w-8 h-8 mb-2 opacity-50" />
+                    <span>Foto Mahasiswa</span>
+                    <span className="text-xs mt-1">Klik untuk upload</span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{member}</h3>
-                  <div className="w-full h-24 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-sm">
-                    Foto Mahasiswa
-                  </div>
+                  <motion.button
+                    className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Upload className="w-4 h-4" />
+                    Upload Foto
+                  </motion.button>
                 </motion.div>
               ))}
             </div>
+            
+            {/* Photo Upload Instructions for Presentation */}
+            <motion.div 
+              className="mt-8 p-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl border-2 border-blue-200"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
+            >
+              <h4 className="text-lg font-bold text-blue-800 mb-3 flex items-center gap-2">
+                <Camera className="w-5 h-5" />
+                Panduan Upload Foto untuk Presentasi:
+              </h4>
+              <ul className="text-gray-700 text-sm space-y-2">
+                <li>• Siapkan foto formal mahasiswa (rasio 1:1, minimal 300x300px)</li>
+                <li>• Format yang didukung: JPG, PNG (maksimal 5MB)</li>
+                <li>• Foto akan muncul di slide presentasi dan homepage</li>
+                <li>• Pastikan foto berkualitas tinggi untuk tampilan optimal</li>
+              </ul>
+            </motion.div>
           </div>
         );
 
@@ -410,15 +500,16 @@ const Presentation = () => {
               className="text-2xl md:text-4xl font-bold text-blue-800 mb-6"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
               {slide.title}
             </motion.h1>
             
             <motion.div 
               className="text-lg md:text-xl text-gray-700 mb-6 font-medium"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
             >
               {slide.content}
             </motion.div>
@@ -428,15 +519,16 @@ const Presentation = () => {
                 className="space-y-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
               >
                 {slide.details.map((detail: string, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.7 + index * 0.1 }}
-                    className="flex items-start space-x-3 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500 shadow-sm hover:shadow-md transition-shadow"
+                    transition={{ delay: 0.7 + index * 0.15, duration: 0.6 }}
+                    className="flex items-start space-x-3 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500 shadow-sm hover:shadow-md transition-all duration-300 hover:bg-blue-100"
+                    whileHover={{ x: 5 }}
                   >
                     <ArrowRight className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                     <span className="text-gray-700 font-medium">{detail}</span>
