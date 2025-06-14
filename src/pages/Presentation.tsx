@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Home, Users, Target, BookOpen, Zap, ArrowRight, ArrowDown, Play, Pause, Camera, Upload } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Home, Users, Target, BookOpen, Zap, ArrowRight, ArrowDown, Play, Pause } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Presentation = () => {
@@ -204,7 +204,7 @@ const Presentation = () => {
     if (isAutoPlay) {
       interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 7000); // Increased duration for smoother experience
+      }, 7000);
     }
     return () => clearInterval(interval);
   }, [isAutoPlay, slides.length]);
@@ -381,7 +381,7 @@ const Presentation = () => {
             </Button>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 
@@ -449,9 +449,6 @@ const Presentation = () => {
                     whileHover={{ rotate: 5 }}
                   >
                     {index + 1}
-                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Camera className="w-8 h-8 text-white" />
-                    </div>
                   </motion.div>
                   <h3 className="text-xl font-bold text-gray-800 mb-3">{member}</h3>
                   <div className="w-full h-28 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-500 text-sm hover:bg-gray-50 transition-colors duration-300 group-hover:border-blue-300">
@@ -460,14 +457,6 @@ const Presentation = () => {
                     </div>
                     <span className="text-xs font-medium">Mahasiswa {index + 1}</span>
                   </div>
-                  <motion.button
-                    className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Upload className="w-4 h-4" />
-                    Upload Foto
-                  </motion.button>
                 </motion.div>
               ))}
             </div>

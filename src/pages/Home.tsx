@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
-import { BookOpen, Users, Calculator, Clock, Star, ChevronRight, Upload, Camera } from 'lucide-react';
+import { BookOpen, Users, Calculator, Clock, Star, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -184,21 +184,12 @@ const Home = () => {
                   >
                     <div className="text-center p-8 rounded-3xl bg-gradient-to-b from-white/20 to-white/5 backdrop-blur-xl border-2 border-white/30 hover:border-white/50 transition-all duration-500 hover:shadow-2xl hover:bg-gradient-to-b hover:from-white/25 hover:to-white/10">
                       <div className="relative mb-6">
-                        <div className="relative">
-                          <Avatar className="w-32 h-32 mx-auto ring-4 ring-white/40 group-hover:ring-white/60 transition-all duration-300 shadow-2xl">
-                            <AvatarImage src={member.avatar} />
-                            <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-700 text-white text-3xl font-bold">
-                              {member.name.split(' ').map(n => n[0]).join('')}
-                            </AvatarFallback>
-                          </Avatar>
-                          {/* Photo Upload Indicator */}
-                          <motion.div 
-                            className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full border-4 border-white flex items-center justify-center shadow-lg"
-                            whileHover={{ scale: 1.1 }}
-                          >
-                            <Camera className="w-5 h-5 text-white" />
-                          </motion.div>
-                        </div>
+                        <Avatar className="w-32 h-32 mx-auto ring-4 ring-white/40 group-hover:ring-white/60 transition-all duration-300 shadow-2xl">
+                          <AvatarImage src={member.avatar} />
+                          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-700 text-white text-3xl font-bold">
+                            {member.name.split(' ').map(n => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
                         <div className="absolute -top-3 -right-3 w-8 h-8 bg-green-500 rounded-full border-4 border-white animate-pulse" />
                       </div>
                       <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-200 transition-colors">
@@ -207,39 +198,10 @@ const Home = () => {
                       <p className="text-blue-200 font-semibold mb-2 text-lg">{member.role}</p>
                       <p className="text-purple-200 font-medium mb-3">NIM: {member.nim}</p>
                       <p className="text-white/80 text-sm leading-relaxed">{member.description}</p>
-                      
-                      {/* Upload Button for Photos */}
-                      <motion.button
-                        className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Upload className="w-4 h-4" />
-                        Upload Foto
-                      </motion.button>
                     </div>
                   </motion.div>
                 ))}
               </div>
-              
-              {/* Photo Upload Instructions */}
-              <motion.div 
-                className="mt-8 p-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl border border-white/20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 3 }}
-              >
-                <h4 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                  <Camera className="w-5 h-5" />
-                  Cara Upload Foto Mahasiswa:
-                </h4>
-                <ul className="text-white/90 text-sm space-y-2">
-                  <li>• Siapkan foto formal mahasiswa (format JPG/PNG, maks 5MB)</li>
-                  <li>• Klik tombol "Upload Foto" pada setiap card anggota</li>
-                  <li>• Foto akan otomatis ter-crop sesuai ukuran avatar</li>
-                  <li>• Pastikan foto berkualitas tinggi untuk tampilan optimal</li>
-                </ul>
-              </motion.div>
             </CardContent>
           </Card>
         </motion.div>
