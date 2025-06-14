@@ -225,11 +225,11 @@ const Presentation = () => {
   const getCurrentSlide = () => slides[currentSlide];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-800 via-blue-500 to-slate-100 relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-8"
           animate={{
             background: [
               'radial-gradient(circle at 20% 80%, #1e40af 0%, transparent 50%)',
@@ -237,7 +237,7 @@ const Presentation = () => {
               'radial-gradient(circle at 40% 40%, #60a5fa 0%, transparent 50%)'
             ]
           }}
-          transition={{ duration: 10, repeat: Infinity }}
+          transition={{ duration: 12, repeat: Infinity }}
         />
       </div>
 
@@ -245,24 +245,24 @@ const Presentation = () => {
       <motion.div 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="relative z-20 p-4 bg-white/10 backdrop-blur-lg border-b border-white/20"
+        className="relative z-20 p-2 sm:p-3 lg:p-4 bg-white/12 backdrop-blur-lg border-b border-white/25"
       >
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-center max-w-7xl mx-auto gap-2 sm:gap-4">
           <Link to="/">
-            <Button variant="ghost" className="text-white hover:bg-white/20">
-              <Home className="w-4 h-4 mr-2" />
+            <Button variant="ghost" className="text-white hover:bg-white/20 text-xs sm:text-sm">
+              <Home className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Beranda
             </Button>
           </Link>
           
           <div className="text-white text-center">
-            <h1 className="text-xl font-bold">Metode Dekomposisi LU Gauss</h1>
-            <p className="text-sm opacity-80">Slide {currentSlide + 1} dari {slides.length}</p>
+            <h1 className="text-sm sm:text-lg lg:text-xl font-bold">Metode Dekomposisi LU Gauss</h1>
+            <p className="text-xs sm:text-sm opacity-80">Slide {currentSlide + 1} dari {slides.length}</p>
           </div>
 
           <Button 
             onClick={() => setIsAutoPlay(!isAutoPlay)}
-            className={isAutoPlay ? "bg-green-500 hover:bg-green-600" : "bg-blue-500 hover:bg-blue-600"}
+            className={`text-xs sm:text-sm ${isAutoPlay ? "bg-green-600 hover:bg-green-700" : "bg-blue-600 hover:bg-blue-700"}`}
           >
             {isAutoPlay ? "Pause" : "Auto Play"}
           </Button>
@@ -270,18 +270,18 @@ const Presentation = () => {
       </motion.div>
 
       {/* Main Slide Content */}
-      <div className="relative z-10 flex-1 flex items-center justify-center p-4">
+      <div className="relative z-10 flex-1 flex items-center justify-center p-2 sm:p-4">
         <motion.div className="w-full max-w-6xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+              initial={{ opacity: 0, scale: 0.9, rotateY: 45 }}
               animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              exit={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-              transition={{ duration: 0.6, type: "spring" }}
+              exit={{ opacity: 0, scale: 0.9, rotateY: -45 }}
+              transition={{ duration: 0.5, type: "spring" }}
             >
-              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-200 shadow-2xl min-h-[600px]">
-                <CardContent className="p-12">
+              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-100 shadow-2xl min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]">
+                <CardContent className="p-4 sm:p-6 lg:p-8 xl:p-12">
                   {renderSlideContent(getCurrentSlide())}
                 </CardContent>
               </Card>
@@ -294,22 +294,22 @@ const Presentation = () => {
       <motion.div 
         initial={{ y: 100 }}
         animate={{ y: 0 }}
-        className="relative z-20 p-6 bg-white/10 backdrop-blur-lg border-t border-white/20"
+        className="relative z-20 p-2 sm:p-4 lg:p-6 bg-white/12 backdrop-blur-lg border-t border-white/25"
       >
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <Button onClick={prevSlide} className="bg-blue-500 hover:bg-blue-600 text-white">
-            <ChevronLeft className="w-4 h-4 mr-2" />
+        <div className="flex flex-col sm:flex-row justify-between items-center max-w-7xl mx-auto gap-2 sm:gap-4">
+          <Button onClick={prevSlide} className="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm w-full sm:w-auto">
+            <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             Sebelumnya
           </Button>
 
           {/* Slide Indicators */}
-          <div className="flex space-x-2 overflow-x-auto">
+          <div className="flex space-x-1 sm:space-x-2 overflow-x-auto max-w-full px-2">
             {slides.map((_, index) => (
               <motion.button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentSlide ? 'bg-blue-400 scale-125' : 'bg-white/50'
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all flex-shrink-0 ${
+                  index === currentSlide ? 'bg-blue-300 scale-125' : 'bg-white/60'
                 }`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
@@ -317,9 +317,9 @@ const Presentation = () => {
             ))}
           </div>
 
-          <Button onClick={nextSlide} className="bg-blue-500 hover:bg-blue-600 text-white">
+          <Button onClick={nextSlide} className="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm w-full sm:w-auto">
             Selanjutnya
-            <ChevronRight className="w-4 h-4 ml-2" />
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2" />
           </Button>
         </div>
       </motion.div>
@@ -330,16 +330,16 @@ const Presentation = () => {
     switch (slide.type) {
       case 'cover':
         return (
-          <div className="text-center space-y-8">
+          <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8">
             <motion.h1 
-              className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent"
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 3, repeat: Infinity }}
             >
               {slide.title}
             </motion.h1>
             <motion.h2 
-              className="text-3xl text-gray-700"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-700"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -347,7 +347,7 @@ const Presentation = () => {
               {slide.subtitle}
             </motion.h2>
             <motion.p 
-              className="text-xl text-blue-600 font-semibold"
+              className="text-base sm:text-lg md:text-xl text-blue-700 font-semibold"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
@@ -359,28 +359,28 @@ const Presentation = () => {
 
       case 'team':
         return (
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-6 lg:space-y-8">
             <motion.h1 
-              className="text-4xl font-bold text-center text-blue-800 mb-8"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-blue-800 mb-4 sm:mb-6 lg:mb-8"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <Users className="inline w-10 h-10 mr-4" />
+              <Users className="inline w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 mr-2 sm:mr-4" />
               {slide.title}
             </motion.h1>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {slide.content.map((member: string, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.2 }}
-                  className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg border-2 border-blue-200"
+                  className="text-center p-3 sm:p-4 lg:p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg border-2 border-blue-150"
                 >
-                  <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-4xl font-bold">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full mx-auto mb-2 sm:mb-3 lg:mb-4 flex items-center justify-center text-white text-xl sm:text-2xl lg:text-4xl font-bold">
                     {index + 1}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800">{member}</h3>
+                  <h3 className="text-sm sm:text-base lg:text-xl font-bold text-gray-800">{member}</h3>
                 </motion.div>
               ))}
             </div>
@@ -389,9 +389,9 @@ const Presentation = () => {
 
       default:
         return (
-          <div className="space-y-6">
+          <div className="space-y-3 sm:space-y-4 lg:space-y-6">
             <motion.h1 
-              className="text-4xl font-bold text-blue-800 mb-6"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-800 mb-3 sm:mb-4 lg:mb-6"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
             >
@@ -399,7 +399,7 @@ const Presentation = () => {
             </motion.h1>
             
             <motion.div 
-              className="text-xl text-gray-700 mb-6"
+              className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-3 sm:mb-4 lg:mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -409,7 +409,7 @@ const Presentation = () => {
 
             {slide.details && (
               <motion.div 
-                className="space-y-4"
+                className="space-y-2 sm:space-y-3 lg:space-y-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
@@ -420,10 +420,10 @@ const Presentation = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.7 + index * 0.1 }}
-                    className="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400"
+                    className="flex items-start space-x-2 sm:space-x-3 p-2 sm:p-3 lg:p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500"
                   >
-                    <ArrowRight className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">{detail}</span>
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm md:text-base text-gray-700">{detail}</span>
                   </motion.div>
                 ))}
               </motion.div>

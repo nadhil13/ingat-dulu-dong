@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -333,7 +332,7 @@ int main() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-800 via-blue-500 to-slate-100 relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
         <motion.div
@@ -346,7 +345,7 @@ int main() {
               'linear-gradient(315deg, #1e40af, transparent)'
             ]
           }}
-          transition={{ duration: 8, repeat: Infinity }}
+          transition={{ duration: 10, repeat: Infinity }}
         />
       </div>
 
@@ -354,40 +353,40 @@ int main() {
       <motion.div 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="relative z-20 p-4 bg-white/10 backdrop-blur-lg border-b border-white/20"
+        className="relative z-20 p-2 sm:p-3 lg:p-4 bg-white/12 backdrop-blur-lg border-b border-white/25"
       >
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-center max-w-7xl mx-auto gap-2 sm:gap-4">
           <Link to="/">
-            <Button variant="ghost" className="text-white hover:bg-white/20">
-              <Home className="w-4 h-4 mr-2" />
+            <Button variant="ghost" className="text-white hover:bg-white/20 text-xs sm:text-sm">
+              <Home className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Beranda
             </Button>
           </Link>
           
           <div className="text-white text-center">
-            <h1 className="text-2xl font-bold">Program C++ - Dekomposisi LU Gauss</h1>
-            <p className="text-sm opacity-80">Implementasi Metode Numerik</p>
+            <h1 className="text-sm sm:text-lg lg:text-2xl font-bold">Program C++ - Dekomposisi LU Gauss</h1>
+            <p className="text-xs sm:text-sm opacity-80">Implementasi Metode Numerik</p>
           </div>
 
-          <div className="flex space-x-2">
-            <Button onClick={handleCopyCode} className="bg-green-500 hover:bg-green-600">
-              <Copy className="w-4 h-4 mr-2" />
+          <div className="flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2">
+            <Button onClick={handleCopyCode} className="bg-green-600 hover:bg-green-700 text-xs sm:text-sm">
+              <Copy className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Salin Kode
             </Button>
             <Button 
               onClick={handleRunDemo} 
               disabled={isRunning}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-orange-600 hover:bg-orange-700 text-xs sm:text-sm"
             >
               {isRunning ? (
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 >
-                  <Zap className="w-4 h-4 mr-2" />
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                 </motion.div>
               ) : (
-                <Play className="w-4 h-4 mr-2" />
+                <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               )}
               {isRunning ? "Running..." : "Demo"}
             </Button>
@@ -396,39 +395,42 @@ int main() {
       </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-10 p-6 max-w-7xl mx-auto">
+      <div className="relative z-10 p-2 sm:p-4 lg:p-6 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Tabs defaultValue="code" className="space-y-6">
+          <Tabs defaultValue="code" className="space-y-3 sm:space-y-4 lg:space-y-6">
             <TabsList className="grid w-full grid-cols-3 bg-white/20 backdrop-blur-lg">
-              <TabsTrigger value="code" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                <Code className="w-4 h-4 mr-2" />
-                Kode Program
+              <TabsTrigger value="code" className="data-[state=active]:bg-white data-[state=active]:text-blue-700 text-xs sm:text-sm">
+                <Code className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Kode Program</span>
+                <span className="sm:hidden">Kode</span>
               </TabsTrigger>
-              <TabsTrigger value="explanation" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                <FileText className="w-4 h-4 mr-2" />
-                Penjelasan
+              <TabsTrigger value="explanation" className="data-[state=active]:bg-white data-[state=active]:text-blue-700 text-xs sm:text-sm">
+                <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Penjelasan</span>
+                <span className="sm:hidden">Info</span>
               </TabsTrigger>
-              <TabsTrigger value="output" className="data-[state=active]:bg-white data-[state=active]:text-blue-600">
-                <Play className="w-4 h-4 mr-2" />
-                Output Demo
+              <TabsTrigger value="output" className="data-[state=active]:bg-white data-[state=active]:text-blue-700 text-xs sm:text-sm">
+                <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Output Demo</span>
+                <span className="sm:hidden">Demo</span>
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="code">
-              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-blue-800">
-                    <Code className="w-6 h-6 mr-2" />
+              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-150">
+                <CardHeader className="pb-2 sm:pb-4">
+                  <CardTitle className="flex items-center text-blue-800 text-sm sm:text-base lg:text-lg">
+                    <Code className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 mr-2" />
                     Implementasi C++ - Metode Dekomposisi LU Gauss
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-gray-900 rounded-lg p-4 overflow-auto max-h-[600px]">
-                    <pre className="text-green-400 font-mono text-sm leading-relaxed">
+                  <div className="bg-gray-900 rounded-lg p-2 sm:p-3 lg:p-4 overflow-auto max-h-[400px] sm:max-h-[500px] lg:max-h-[600px]">
+                    <pre className="text-green-400 font-mono text-xs sm:text-sm leading-relaxed">
                       <code>{cppCode}</code>
                     </pre>
                   </div>
@@ -437,35 +439,35 @@ int main() {
             </TabsContent>
 
             <TabsContent value="explanation">
-              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-blue-800">
-                    <FileText className="w-6 h-6 mr-2" />
+              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-150">
+                <CardHeader className="pb-2 sm:pb-4">
+                  <CardTitle className="flex items-center text-blue-800 text-sm sm:text-base lg:text-lg">
+                    <FileText className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 mr-2" />
                     Penjelasan Program
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-3 sm:space-y-4 lg:space-y-6">
                   <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <h3 className="text-xl font-bold text-blue-700 mb-3">🎯 Fitur Utama Program</h3>
-                    <ul className="space-y-2 text-gray-700">
+                    <h3 className="text-lg sm:text-xl font-bold text-blue-700 mb-2 sm:mb-3">🎯 Fitur Utama Program</h3>
+                    <ul className="space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base">
                       <li className="flex items-start">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-600 rounded-full mt-1.5 sm:mt-2 mr-2 sm:mr-3 flex-shrink-0"></span>
                         <span><strong>Class LUDecomposition:</strong> Implementasi lengkap algoritma dekomposisi LU</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-600 rounded-full mt-1.5 sm:mt-2 mr-2 sm:mr-3 flex-shrink-0"></span>
                         <span><strong>Partial Pivoting:</strong> Penanganan kasus pivot nol untuk stabilitas numerik</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-600 rounded-full mt-1.5 sm:mt-2 mr-2 sm:mr-3 flex-shrink-0"></span>
                         <span><strong>Forward & Backward Substitution:</strong> Solusi sistem persamaan lengkap</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-600 rounded-full mt-1.5 sm:mt-2 mr-2 sm:mr-3 flex-shrink-0"></span>
                         <span><strong>Verifikasi Otomatis:</strong> Cek kebenaran solusi dengan menghitung Ax = b</span>
                       </li>
                     </ul>
@@ -476,9 +478,9 @@ int main() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <h3 className="text-xl font-bold text-blue-700 mb-3">🔧 Struktur Program</h3>
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <ol className="space-y-2 text-gray-700">
+                    <h3 className="text-lg sm:text-xl font-bold text-blue-700 mb-2 sm:mb-3">🔧 Struktur Program</h3>
+                    <div className="bg-blue-50 p-3 sm:p-4 rounded-lg">
+                      <ol className="space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base">
                         <li><strong>1. Input:</strong> Matriks A dan vektor b</li>
                         <li><strong>2. Dekomposisi:</strong> A = LU dengan pivoting</li>
                         <li><strong>3. Substitusi Maju:</strong> Ly = Pb</li>
@@ -493,23 +495,23 @@ int main() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                   >
-                    <h3 className="text-xl font-bold text-blue-700 mb-3">💡 Keunggulan Implementasi</h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
-                        <h4 className="font-bold text-green-700">Efisiensi</h4>
-                        <p className="text-sm text-gray-600">Kompleksitas O(n³/3) untuk dekomposisi</p>
+                    <h3 className="text-lg sm:text-xl font-bold text-blue-700 mb-2 sm:mb-3">💡 Keunggulan Implementasi</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+                      <div className="bg-green-50 p-2 sm:p-3 lg:p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 className="font-bold text-green-700 text-sm sm:text-base">Efisiensi</h4>
+                        <p className="text-xs sm:text-sm text-gray-600">Kompleksitas O(n³/3) untuk dekomposisi</p>
                       </div>
-                      <div className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400">
-                        <h4 className="font-bold text-orange-700">Stabilitas</h4>
-                        <p className="text-sm text-gray-600">Partial pivoting mencegah error numerik</p>
+                      <div className="bg-orange-50 p-2 sm:p-3 lg:p-4 rounded-lg border-l-4 border-orange-500">
+                        <h4 className="font-bold text-orange-700 text-sm sm:text-base">Stabilitas</h4>
+                        <p className="text-xs sm:text-sm text-gray-600">Partial pivoting mencegah error numerik</p>
                       </div>
-                      <div className="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400">
-                        <h4 className="font-bold text-purple-700">Fleksibilitas</h4>
-                        <p className="text-sm text-gray-600">Mendukung matriks ukuran variabel</p>
+                      <div className="bg-purple-50 p-2 sm:p-3 lg:p-4 rounded-lg border-l-4 border-purple-500">
+                        <h4 className="font-bold text-purple-700 text-sm sm:text-base">Fleksibilitas</h4>
+                        <p className="text-xs sm:text-sm text-gray-600">Mendukung matriks ukuran variabel</p>
                       </div>
-                      <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
-                        <h4 className="font-bold text-blue-700">User-Friendly</h4>
-                        <p className="text-sm text-gray-600">Interface menu dan output detail</p>
+                      <div className="bg-blue-50 p-2 sm:p-3 lg:p-4 rounded-lg border-l-4 border-blue-500">
+                        <h4 className="font-bold text-blue-700 text-sm sm:text-base">User-Friendly</h4>
+                        <p className="text-xs sm:text-sm text-gray-600">Interface menu dan output detail</p>
                       </div>
                     </div>
                   </motion.div>
@@ -518,16 +520,16 @@ int main() {
             </TabsContent>
 
             <TabsContent value="output">
-              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-blue-800">
-                    <Play className="w-6 h-6 mr-2" />
+              <Card className="bg-white/95 backdrop-blur-lg border-2 border-blue-150">
+                <CardHeader className="pb-2 sm:pb-4">
+                  <CardTitle className="flex items-center text-blue-800 text-sm sm:text-base lg:text-lg">
+                    <Play className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 mr-2" />
                     Output Demo Program
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-black rounded-lg p-4 overflow-auto max-h-[600px]">
-                    <pre className="text-green-400 font-mono text-sm leading-relaxed">
+                  <div className="bg-black rounded-lg p-2 sm:p-3 lg:p-4 overflow-auto max-h-[400px] sm:max-h-[500px] lg:max-h-[600px]">
+                    <pre className="text-green-400 font-mono text-xs sm:text-sm leading-relaxed">
 {`╔══════════════════════════════════════════╗
 ║        METODE DEKOMPOSISI LU GAUSS       ║
 ║     Solusi Sistem Persamaan Linier      ║
