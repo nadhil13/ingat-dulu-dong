@@ -151,7 +151,7 @@ const Home = () => {
           transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
           className="mb-12"
         >
-          <Card className="bg-white/10 backdrop-blur-2xl border-2 border-white/30 text-white shadow-2xl overflow-hidden">
+          <Card className="bg-gray-900/80 backdrop-blur-2xl border-2 border-white/20 text-white shadow-2xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-transparent" />
             <CardHeader className="relative pb-8">
               <CardTitle className="text-center text-3xl md:text-4xl font-bold flex items-center justify-center gap-4">
@@ -182,7 +182,7 @@ const Home = () => {
                     }}
                     className="group cursor-pointer"
                   >
-                    <div className="text-center p-8 rounded-3xl bg-gradient-to-b from-white/20 to-white/5 backdrop-blur-xl border-2 border-white/30 hover:border-white/50 transition-all duration-500 hover:shadow-2xl hover:bg-gradient-to-b hover:from-white/25 hover:to-white/10">
+                    <div className="text-center p-8 rounded-3xl bg-gradient-to-b from-gray-800/60 to-gray-900/40 backdrop-blur-xl border-2 border-white/20 hover:border-white/40 transition-all duration-500 hover:shadow-2xl hover:bg-gradient-to-b hover:from-gray-700/60 hover:to-gray-800/40">
                       <div className="relative mb-6">
                         <Avatar className="w-32 h-32 mx-auto ring-4 ring-white/40 group-hover:ring-white/60 transition-all duration-300 shadow-2xl">
                           <AvatarImage src={member.avatar} />
@@ -224,7 +224,7 @@ const Home = () => {
               whileTap={{ scale: 0.98 }}
               className="h-full"
             >
-              <Card className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-2xl border-2 border-white/30 text-white h-full hover:shadow-2xl transition-all duration-700 hover:border-white/60 overflow-hidden group-hover:bg-gradient-to-br group-hover:from-white/25 group-hover:to-white/10">
+              <Card className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-2xl border-2 border-white/20 text-white h-full hover:shadow-2xl transition-all duration-700 hover:border-white/40 overflow-hidden group-hover:bg-gradient-to-br group-hover:from-gray-800/80 group-hover:to-gray-700/60">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <CardContent className="relative p-10 text-center h-full flex flex-col justify-center">
                   <motion.div
@@ -246,7 +246,7 @@ const Home = () => {
                     Lihat presentasi lengkap tentang Metode Dekomposisi LU Gauss dengan visualisasi interaktif dan animasi smooth
                   </p>
                   <motion.div 
-                    className="inline-flex items-center gap-3 bg-gray-800 text-white hover:bg-gray-900 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-all shadow-lg"
+                    className="inline-flex items-center gap-3 bg-gray-800/80 text-white hover:bg-gray-700/80 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-all shadow-lg border border-white/20"
                     whileHover={{ boxShadow: "0 10px 30px rgba(0,0,0,0.3)" }}
                   >
                     Mulai Presentasi
@@ -268,7 +268,7 @@ const Home = () => {
               whileTap={{ scale: 0.98 }}
               className="h-full"
             >
-              <Card className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-2xl border-2 border-white/30 text-white h-full hover:shadow-2xl transition-all duration-700 hover:border-white/60 overflow-hidden group-hover:bg-gradient-to-br group-hover:from-white/25 group-hover:to-white/10">
+              <Card className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-2xl border-2 border-white/20 text-white h-full hover:shadow-2xl transition-all duration-700 hover:border-white/40 overflow-hidden group-hover:bg-gradient-to-br group-hover:from-gray-800/80 group-hover:to-gray-700/60">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <CardContent className="relative p-10 text-center h-full flex flex-col justify-center">
                   <motion.div
@@ -290,7 +290,7 @@ const Home = () => {
                     Implementasi kode C++ lengkap untuk Metode Dekomposisi LU Gauss dengan demo interaktif dan grafik realtime
                   </p>
                   <motion.div 
-                    className="inline-flex items-center gap-3 bg-gray-800 text-white hover:bg-gray-900 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-all shadow-lg"
+                    className="inline-flex items-center gap-3 bg-gray-800/80 text-white hover:bg-gray-700/80 font-bold px-8 py-4 rounded-full group-hover:scale-105 transition-all shadow-lg border border-white/20"
                     whileHover={{ boxShadow: "0 10px 30px rgba(0,0,0,0.3)" }}
                   >
                     Lihat Program
