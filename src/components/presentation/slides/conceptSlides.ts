@@ -19,9 +19,7 @@ export const conceptSlides = [
     content: "Karakteristik dan struktur matriks L dan U dalam dekomposisi",
     details: [
       "Matriks L memiliki elemen diagonal bernilai 1, elemen di atas diagonal bernilai 0, dan elemen di bawah diagonal berisi faktor pengali dari eliminasi Gauss.",
-      "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0.",
-      "",
-      "Contoh visual dekomposisi:"
+      "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0."
     ],
     matrixExample: {
       description: "A = L × U",
@@ -39,20 +37,13 @@ export const conceptSlides = [
     content: "Keunggulan menggunakan metode dekomposisi LU",
     details: [
       "Tujuan utama adalah untuk mengubah satu sistem persamaan yang kompleks (Ax=b) menjadi dua sistem persamaan yang lebih mudah diselesaikan.",
-      "",
       "Prosesnya:",
       "1. Mulai dengan Ax=b.",
       "2. Substitusi A dengan LU, menjadi LUx=b.",
       "3. Misalkan Ux=y.",
       "4. Maka, kita mendapatkan dua persamaan:",
       "   • Ly=b (Forward substitution)",
-      "   • Ux=y (Backward substitution)",
-      "",
-      "Keuntungan metode ini:",
-      "• Efisien untuk menyelesaikan sistem dengan banyak vektor ruas kanan (b)",
-      "• Sekali dekomposisi dilakukan, dapat digunakan berulang kali",
-      "• Mengurangi kompleksitas komputasi",
-      "• Lebih stable secara numerik dengan teknik pivoting"
+      "   • Ux=y (Backward substitution)"
     ],
     type: "benefits"
   }
