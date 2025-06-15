@@ -22,11 +22,11 @@ export const conceptSlides = [
       "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0."
     ],
     matrixExample: {
-      description: "A = L × U",
+      description: "A = LU",
       matrices: {
-        A: "⎡ 2  1  1 ⎤\n⎢ 4  3  3 ⎥\n⎣ 8  7  9 ⎦",
-        L: "⎡ 1  0  0 ⎤\n⎢ 2  1  0 ⎥\n⎣ 4  3  1 ⎦",
-        U: "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  0  2 ⎦"
+        A: "⎡ a₁₁  a₁₂  a₁₃ ⎤\n⎢ a₂₁  a₂₂  a₂₃ ⎥\n⎣ a₃₁  a₃₂  a₃₃ ⎦",
+        L: "⎡  1   0   0 ⎤\n⎢ l₂₁   1   0 ⎥\n⎣ l₃₁  l₃₂   1 ⎦",
+        U: "⎡ u₁₁  u₁₂  u₁₃ ⎤\n⎢  0   u₂₂  u₂₃ ⎥\n⎣  0    0   u₃₃ ⎦"
       }
     },
     type: "matrix-explanation"
