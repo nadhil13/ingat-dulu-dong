@@ -48,19 +48,22 @@ export const presentationSlides = [
     title: "Tujuan dan Manfaat",
     content: "Keunggulan menggunakan metode dekomposisi LU",
     details: [
-      "Tujuan utama adalah untuk mengubah satu sistem persamaan yang kompleks (Ax=b) menjadi dua sistem persamaan yang lebih mudah diselesaikan."
+      "Tujuan utama adalah untuk mengubah satu sistem persamaan yang kompleks (Ax=b) menjadi dua sistem persamaan yang lebih mudah diselesaikan.",
+      "",
+      "Prosesnya:",
+      "1. Mulai dengan Ax=b.",
+      "2. Substitusi A dengan LU, menjadi LUx=b.",
+      "3. Misalkan Ux=y.",
+      "4. Maka, kita mendapatkan dua persamaan:",
+      "   • Ly=b (Forward substitution)",
+      "   • Ux=y (Backward substitution)",
+      "",
+      "Keuntungan metode ini:",
+      "• Efisien untuk menyelesaikan sistem dengan banyak vektor ruas kanan (b)",
+      "• Sekali dekomposisi dilakukan, dapat digunakan berulang kali",
+      "• Mengurangi kompleksitas komputasi",
+      "• Lebih stable secara numerik dengan teknik pivoting"
     ],
-    process: {
-      title: "Prosesnya:",
-      steps: [
-        "1. Mulai dengan Ax=b.",
-        "2. Substitusi A dengan LU, menjadi LUx=b.",
-        "3. Misalkan Ux=y.",
-        "4. Maka, kita mendapatkan dua persamaan:",
-        "   • Ly=b",
-        "   • Ux=y"
-      ]
-    },
     type: "benefits"
   },
   {
