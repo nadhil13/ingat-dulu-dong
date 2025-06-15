@@ -37,10 +37,18 @@ export const presentationSlides = [
     content: "Karakteristik dan struktur matriks L dan U dalam dekomposisi",
     details: [
       "Matriks L memiliki elemen diagonal bernilai 1, elemen di atas diagonal bernilai 0, dan elemen di bawah diagonal berisi faktor pengali dari eliminasi Gauss.",
-      "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0."
+      "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0.",
+      "",
+      "Contoh visual dekomposisi:"
     ],
-    matrixExample: "A = [matriks 3x3] = [matriks L] × [matriks U] = LU",
-    matrixNote: "[SPACE UNTUK GAMBAR MATRIKS - Lampirkan gambar matriks dari slide 4]",
+    matrixExample: {
+      description: "A = L × U",
+      matrices: {
+        A: "⎡ 2  1  1 ⎤\n⎢ 4  3  3 ⎥\n⎣ 8  7  9 ⎦",
+        L: "⎡ 1  0  0 ⎤\n⎢ 2  1  0 ⎥\n⎣ 4  3  1 ⎦",
+        U: "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  0  2 ⎦"
+      }
+    },
     type: "matrix-explanation"
   },
   {
