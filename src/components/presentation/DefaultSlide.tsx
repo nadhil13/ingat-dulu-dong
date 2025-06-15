@@ -30,7 +30,7 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
 
       {/* Enhanced Title with Better Typography */}
       <motion.h1 
-        className="text-3xl md:text-5xl lg:text-6xl font-black text-center relative leading-tight"
+        className="text-3xl md:text-5xl lg:text-6xl font-black text-center relative leading-tight text-gray-900"
         initial={{ opacity: 0, y: -60, scale: 0.8 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -40,27 +40,15 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
         }}
       >
         <motion.span
-          className="bg-gradient-to-r from-blue-800 via-purple-700 to-blue-900 bg-clip-text text-transparent font-extrabold"
-          animate={{ 
-            backgroundPosition: ['0%', '100%', '0%'],
-            textShadow: [
-              '0 0 40px rgba(59, 130, 246, 0.3)',
-              '0 0 60px rgba(168, 85, 247, 0.4)',
-              '0 0 40px rgba(59, 130, 246, 0.3)'
-            ]
-          }}
-          transition={{ 
-            backgroundPosition: { duration: 8, repeat: Infinity },
-            textShadow: { duration: 4, repeat: Infinity }
-          }}
-          style={{ backgroundSize: '300% 100%' }}
+          className="font-extrabold text-gray-900"
+          style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}
         >
           {title}
         </motion.span>
         
         {/* Enhanced Animated Underline */}
         <motion.div
-          className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 rounded-full shadow-lg"
+          className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-2 bg-blue-600 rounded-full shadow-lg"
           initial={{ width: 0, opacity: 0 }}
           animate={{ width: "80%", opacity: 1 }}
           transition={{ delay: 0.8, duration: 1.2, ease: "easeOut" }}
@@ -69,7 +57,7 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
       
       {/* Enhanced Content Box */}
       <motion.div 
-        className="text-xl md:text-2xl lg:text-3xl text-gray-800 font-semibold relative p-8 bg-gradient-to-r from-blue-50/80 via-white/90 to-purple-50/80 rounded-3xl border-2 border-blue-100/60 shadow-xl backdrop-blur-sm"
+        className="text-xl md:text-2xl lg:text-3xl text-gray-800 font-semibold relative p-8 bg-white/90 rounded-3xl border-2 border-gray-200 shadow-xl backdrop-blur-sm"
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ delay: 0.4, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -80,24 +68,20 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
         }}
       >
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-blue-100/30 via-purple-100/30 to-blue-100/30 rounded-3xl"
+          className="absolute inset-0 bg-gray-50/30 rounded-3xl"
           animate={{ opacity: [0.2, 0.5, 0.2] }}
           transition={{ duration: 6, repeat: Infinity }}
         />
         
         <motion.span
           className="relative z-10 leading-relaxed font-bold text-gray-900"
-          animate={{
-            color: ['#1F2937', '#3B82F6', '#8B5CF6', '#1F2937']
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
         >
           {content}
         </motion.span>
 
         {/* Enhanced Floating Sparkle */}
         <motion.div
-          className="absolute top-4 right-4 text-blue-500"
+          className="absolute top-4 right-4 text-gray-600"
           animate={{
             rotate: [0, 360],
             scale: [1, 1.4, 1],
@@ -129,7 +113,7 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
                   duration: 0.8,
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
-                className="flex items-start space-x-6 p-7 bg-gradient-to-r from-blue-50/90 via-white/95 to-purple-50/90 rounded-2xl border-l-6 border-blue-500 shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden backdrop-blur-sm"
+                className="flex items-start space-x-6 p-7 bg-white/95 rounded-2xl border-l-6 border-blue-600 shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden backdrop-blur-sm"
                 whileHover={{ 
                   x: 12,
                   scale: 1.03,
@@ -139,14 +123,14 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
               >
                 {/* Enhanced Background Shimmer */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-200/40 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/40 to-transparent"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "100%" }}
                   transition={{ duration: 1 }}
                 />
 
                 <motion.div
-                  className="flex-shrink-0 p-3 bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600 rounded-2xl text-white shadow-xl"
+                  className="flex-shrink-0 p-3 bg-blue-600 rounded-2xl text-white shadow-xl"
                   animate={{
                     rotate: [0, 360],
                     scale: [1, 1.15, 1]
@@ -163,8 +147,7 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
                 <motion.span 
                   className="text-lg md:text-xl lg:text-2xl text-gray-800 font-bold relative z-10 leading-relaxed"
                   whileHover={{ 
-                    color: "#3B82F6",
-                    textShadow: "0 0 15px rgba(59, 130, 246, 0.4)",
+                    color: "#1F2937",
                     transition: { duration: 0.3 }
                   }}
                 >
@@ -173,7 +156,7 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
 
                 {/* Enhanced Pulse Effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100"
+                  className="absolute inset-0 bg-gray-100/5 rounded-2xl opacity-0 group-hover:opacity-100"
                   animate={{
                     scale: [1, 1.03, 1],
                   }}
@@ -182,7 +165,7 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
 
                 {/* Enhanced Corner Decoration */}
                 <motion.div
-                  className="absolute top-3 right-3 w-3 h-3 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full"
+                  className="absolute top-3 right-3 w-3 h-3 bg-gray-400 rounded-full"
                   animate={{
                     scale: [1, 1.8, 1],
                     opacity: [0.4, 1, 0.4]
@@ -201,7 +184,7 @@ const DefaultSlide = ({ title, content, details }: DefaultSlideProps) => {
 
       {/* Enhanced Bottom Decorative Element */}
       <motion.div
-        className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-100/30 to-pink-100/30 rounded-full blur-2xl"
+        className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-gray-100/30 to-gray-200/30 rounded-full blur-2xl"
         animate={{
           scale: [1, 1.4, 1],
           opacity: [0.1, 0.3, 0.1],

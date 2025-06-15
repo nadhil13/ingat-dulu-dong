@@ -15,20 +15,11 @@ const AnimatedSubtitle = ({ subtitle }: AnimatedSubtitleProps) => {
       whileHover={{
         scale: 1.05,
         color: "#374151",
-        textShadow: "0 0 20px rgba(0,0,0,0.3)"
+        textShadow: "2px 2px 4px rgba(0,0,0,0.1)"
       }}
     >
       <motion.span
-        animate={{ 
-          background: [
-            'linear-gradient(45deg, #374151, #6B7280)',
-            'linear-gradient(45deg, #6B7280, #9CA3AF)',
-            'linear-gradient(45deg, #374151, #6B7280)'
-          ]
-        }}
-        transition={{ duration: 4, repeat: Infinity }}
-        className="bg-clip-text text-transparent"
-        style={{ backgroundSize: '200% 100%' }}
+        className="text-gray-700"
       >
         {subtitle}
       </motion.span>

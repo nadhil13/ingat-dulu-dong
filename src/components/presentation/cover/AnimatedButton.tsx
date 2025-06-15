@@ -9,14 +9,15 @@ interface AnimatedButtonProps {
 const AnimatedButton = ({ content }: AnimatedButtonProps) => {
   return (
     <motion.div 
-      className="inline-flex items-center gap-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl relative overflow-hidden group cursor-pointer"
+      className="inline-flex items-center gap-4 bg-blue-600 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl relative overflow-hidden group cursor-pointer"
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 1.2, duration: 0.8, type: "spring", stiffness: 150 }}
       whileHover={{ 
         scale: 1.1, 
         boxShadow: "0 25px 50px rgba(0,0,0,0.4)",
-        y: -5
+        y: -5,
+        backgroundColor: "#1D4ED8"
       }}
       whileTap={{ scale: 0.95 }}
     >
@@ -45,15 +46,7 @@ const AnimatedButton = ({ content }: AnimatedButtonProps) => {
       </motion.div>
       
       <motion.span
-        className="relative z-10"
-        animate={{ 
-          textShadow: [
-            '0 0 10px rgba(255,255,255,0.5)',
-            '0 0 20px rgba(255,255,255,0.8)',
-            '0 0 10px rgba(255,255,255,0.5)'
-          ]
-        }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="relative z-10 text-white"
       >
         {content}
       </motion.span>
