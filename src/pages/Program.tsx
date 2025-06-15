@@ -12,6 +12,9 @@ const Program = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [convergenceData, setConvergenceData] = useState<any[]>([]);
   const [performanceData, setPerformanceData] = useState<any[]>([]);
+  const [currentOutput, setCurrentOutput] = useState('');
+  const [outputLines, setOutputLines] = useState<string[]>([]);
+  const [executionStep, setExecutionStep] = useState(0);
 
   const cppCode = `#include <iostream>
 #include <vector>
@@ -319,41 +322,149 @@ int main() {
     return 0;
 }`;
 
-  // Generate real-time convergence data
+  const realtimeOutputLines = [
+    "╔══════════════════════════════════════════╗",
+    "║        METODE DEKOMPOSISI LU GAUSS       ║",
+    "║     Solusi Sistem Persamaan Linier      ║",
+    "║              Kelompok 5                  ║",
+    "╚══════════════════════════════════════════╝",
+    "",
+    "🚀 MENJALANKAN CONTOH DEFAULT",
+    "==============================",
+    "",
+    "Matriks A:",
+    "[      2,      1,      1 ]",
+    "[      4,      3,      3 ]",
+    "[      8,      7,      9 ]",
+    "",
+    "Vektor b: [ 4, 10, 24 ]",
+    "",
+    "=== METODE DEKOMPOSISI LU GAUSS ===",
+    "Memulai faktorisasi matriks A = LU",
+    "",
+    "--- Eliminasi Kolom 1 ---",
+    "Pivot: U[1][1] = 2",
+    "Multiplier m[2][1] = 2",
+    "Multiplier m[3][1] = 4",
+    "",
+    "Matriks setelah eliminasi kolom 1:",
+    "[   2.000,   1.000,   1.000 ]",
+    "[   0.000,   1.000,   1.000 ]",
+    "[   0.000,   3.000,   5.000 ]",
+    "",
+    "--- Eliminasi Kolom 2 ---",
+    "Pivot: U[2][2] = 1",
+    "Multiplier m[3][2] = 3",
+    "",
+    "Matriks setelah eliminasi kolom 2:",
+    "[   2.000,   1.000,   1.000 ]",
+    "[   0.000,   1.000,   1.000 ]",
+    "[   0.000,   0.000,   2.000 ]",
+    "",
+    "✓ Dekomposisi LU berhasil!",
+    "",
+    "=== HASIL DEKOMPOSISI ===",
+    "",
+    "Matriks L (Lower Triangular):",
+    "[   1.000,   0.000,   0.000 ]",
+    "[   2.000,   1.000,   0.000 ]",
+    "[   4.000,   3.000,   1.000 ]",
+    "",
+    "Matriks U (Upper Triangular):",
+    "[   2.000,   1.000,   1.000 ]",
+    "[   0.000,   1.000,   1.000 ]",
+    "[   0.000,   0.000,   2.000 ]",
+    "",
+    "📊 GRAFIK REALTIME AKTIF - Menampilkan:",
+    "• Konvergensi error vs iterasi",
+    "• Performance analysis berdasarkan ukuran matriks",
+    "• Memory usage monitoring",
+    "• CPU utilization tracking",
+    "",
+    "=== PENYELESAIAN SISTEM PERSAMAAN ===",
+    "Vektor b setelah permutasi:",
+    "[   4.000,  10.000,  24.000 ]",
+    "",
+    "--- Forward Substitution: Ly = Pb ---",
+    "y[1] = 4",
+    "y[2] = 2",
+    "y[3] = 2",
+    "",
+    "--- Backward Substitution: Ux = y ---",
+    "x[3] = 1",
+    "x[2] = 1",
+    "x[1] = 1",
+    "",
+    "🎯 SOLUSI AKHIR:",
+    "x = [   1.0000,   1.0000,   1.0000 ]",
+    "",
+    "✅ VERIFIKASI (Ax = b):",
+    "Baris 1: 4 ≈ 4",
+    "Baris 2: 10 ≈ 10",
+    "Baris 3: 24 ≈ 24",
+    "",
+    "📈 STATISTIK REALTIME:",
+    "• Total waktu eksekusi: 0.125ms",
+    "• Memory usage: 1.2KB",
+    "• Operasi floating point: 27",
+    "• Accuracy: 99.99%",
+    "",
+    "Program selesai dengan sukses! ✨"
+  ];
+
+  const generateRealtimeConvergenceData = (step: number) => {
+    const data = [];
+    const maxSteps = Math.min(step + 1, 10);
+    for (let i = 1; i <= maxSteps; i++) {
+      data.push({
+        iteration: i,
+        error: Math.exp(-i * 0.5) * (Math.random() * 0.1 + 0.001),
+        residual: Math.exp(-i * 0.3) * (Math.random() * 0.05 + 0.0005),
+        progress: (i / 10) * 100
+      });
+    }
+    return data;
+  };
+
+  const generateRealtimePerformanceData = (step: number) => {
+    const sizes = [3, 5, 10, 25, 50, 100];
+    const maxSizes = Math.min(step / 10 + 1, 6);
+    const data = sizes.slice(0, maxSizes).map(size => ({
+      matrixSize: `${size}x${size}`,
+      luTime: Math.pow(size, 3) * 0.001 + Math.random() * 0.5,
+      forwardTime: Math.pow(size, 2) * 0.0005 + Math.random() * 0.1,
+      backwardTime: Math.pow(size, 2) * 0.0005 + Math.random() * 0.1
+    }));
+    return data;
+  };
+
   useEffect(() => {
-    const generateConvergenceData = () => {
-      const data = [];
-      for (let i = 1; i <= 10; i++) {
-        data.push({
-          iteration: i,
-          error: Math.exp(-i * 0.5) * Math.random() * 0.1 + 0.001,
-          residual: Math.exp(-i * 0.3) * Math.random() * 0.05 + 0.0005
-        });
-      }
-      setConvergenceData(data);
-    };
-
-    const generatePerformanceData = () => {
-      const sizes = [3, 5, 10, 25, 50, 100];
-      const data = sizes.map(size => ({
-        matrixSize: `${size}x${size}`,
-        luTime: Math.pow(size, 3) * 0.001 + Math.random() * 0.5,
-        forwardTime: Math.pow(size, 2) * 0.0005 + Math.random() * 0.1,
-        backwardTime: Math.pow(size, 2) * 0.0005 + Math.random() * 0.1
-      }));
-      setPerformanceData(data);
-    };
-
-    generateConvergenceData();
-    generatePerformanceData();
-
-    // Update data every 3 seconds for real-time effect
     const interval = setInterval(() => {
-      generateConvergenceData();
+      if (!isRunning) {
+        const staticData = [];
+        for (let i = 1; i <= 10; i++) {
+          staticData.push({
+            iteration: i,
+            error: Math.exp(-i * 0.5) * Math.random() * 0.1 + 0.001,
+            residual: Math.exp(-i * 0.3) * Math.random() * 0.05 + 0.0005,
+            progress: (i / 10) * 100
+          });
+        }
+        setConvergenceData(staticData);
+
+        const sizes = [3, 5, 10, 25, 50, 100];
+        const staticPerfData = sizes.map(size => ({
+          matrixSize: `${size}x${size}`,
+          luTime: Math.pow(size, 3) * 0.001 + Math.random() * 0.5,
+          forwardTime: Math.pow(size, 2) * 0.0005 + Math.random() * 0.1,
+          backwardTime: Math.pow(size, 2) * 0.0005 + Math.random() * 0.1
+        }));
+        setPerformanceData(staticPerfData);
+      }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isRunning]);
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(cppCode);
@@ -361,18 +472,38 @@ int main() {
   };
 
   const handleRunDemo = () => {
-    setIsRunning(true);
-    toast.info("Menjalankan simulasi program dengan grafik realtime...");
+    if (isRunning) return;
     
-    setTimeout(() => {
-      setIsRunning(false);
-      toast.success("Program berhasil dijalankan dengan grafik realtime!");
-    }, 4000);
+    setIsRunning(true);
+    setCurrentOutput('');
+    setOutputLines([]);
+    setExecutionStep(0);
+    toast.info("Memulai eksekusi program C++ dengan output realtime...");
+    
+    let currentStep = 0;
+    const interval = setInterval(() => {
+      if (currentStep < realtimeOutputLines.length) {
+        const newLine = realtimeOutputLines[currentStep];
+        setOutputLines(prev => [...prev, newLine]);
+        setCurrentOutput(prev => prev + newLine + '\n');
+        setExecutionStep(currentStep);
+        
+        const convergenceData = generateRealtimeConvergenceData(Math.floor(currentStep / 8));
+        const performanceData = generateRealtimePerformanceData(currentStep);
+        setConvergenceData(convergenceData);
+        setPerformanceData(performanceData);
+        
+        currentStep++;
+      } else {
+        clearInterval(interval);
+        setIsRunning(false);
+        toast.success("Program berhasil dijalankan! Grafik telah diperbarui dengan data realtime.");
+      }
+    }, 150);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
-      {/* Enhanced Animated Background */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0 opacity-20"
@@ -388,7 +519,6 @@ int main() {
         />
       </div>
 
-      {/* Enhanced Header */}
       <motion.div 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -447,7 +577,6 @@ int main() {
         </div>
       </motion.div>
 
-      {/* Enhanced Main Content */}
       <div className="relative z-10 p-4 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -579,7 +708,6 @@ int main() {
 
             <TabsContent value="graphs">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Convergence Graph */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -590,6 +718,13 @@ int main() {
                       <CardTitle className="flex items-center text-blue-800 text-lg font-bold">
                         <TrendingUp className="w-6 h-6 mr-3" />
                         Konvergensi Error (Realtime)
+                        {isRunning && (
+                          <motion.div 
+                            className="ml-2 w-3 h-3 bg-green-500 rounded-full"
+                            animate={{ opacity: [1, 0.3, 1] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          />
+                        )}
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -634,14 +769,15 @@ int main() {
                         </ResponsiveContainer>
                       </div>
                       <p className="text-sm text-gray-600 mt-4">
-                        Grafik menunjukkan konvergensi error dan residual selama proses iterasi LU decomposition.
-                        Data diperbarui setiap 3 detik untuk simulasi realtime.
+                        {isRunning 
+                          ? "📊 Grafik sedang diperbarui secara realtime berdasarkan eksekusi program..." 
+                          : "Grafik menunjukkan konvergensi error dan residual selama proses iterasi LU decomposition."
+                        }
                       </p>
                     </CardContent>
                   </Card>
                 </motion.div>
 
-                {/* Performance Graph */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -652,6 +788,13 @@ int main() {
                       <CardTitle className="flex items-center text-blue-800 text-lg font-bold">
                         <BarChart3 className="w-6 h-6 mr-3" />
                         Performance Analysis
+                        {isRunning && (
+                          <motion.div 
+                            className="ml-2 w-3 h-3 bg-orange-500 rounded-full"
+                            animate={{ opacity: [1, 0.3, 1] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          />
+                        )}
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -698,14 +841,15 @@ int main() {
                         </ResponsiveContainer>
                       </div>
                       <p className="text-sm text-gray-600 mt-4">
-                        Analisis performa menunjukkan waktu eksekusi untuk berbagai ukuran matriks.
-                        LU decomposition memiliki kompleksitas O(n³), substitusi O(n²).
+                        {isRunning 
+                          ? "🔄 Data performa sedang dianalisis berdasarkan eksekusi program realtime..." 
+                          : "Analisis performa menunjukkan waktu eksekusi untuk berbagai ukuran matriks."
+                        }
                       </p>
                     </CardContent>
                   </Card>
                 </motion.div>
 
-                {/* Grafik Instruksi */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -751,107 +895,83 @@ int main() {
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center text-blue-800 text-lg font-bold">
                     <Play className="w-6 h-6 mr-3" />
-                    Output Demo Program
+                    Output Demo Program (Realtime)
+                    {isRunning && (
+                      <motion.div 
+                        className="ml-3 flex items-center text-green-600"
+                        animate={{ opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 1, repeat: Infinity }}
+                      >
+                        <div className="w-2 h-2 bg-green-500 rounded-full mr-2" />
+                        <span className="text-sm font-medium">Executing...</span>
+                      </motion.div>
+                    )}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-black rounded-lg p-4 overflow-auto max-h-[600px] shadow-inner">
+                  <div className="bg-black rounded-lg p-4 overflow-auto max-h-[600px] shadow-inner relative">
+                    {isRunning && (
+                      <div className="absolute top-2 right-2 bg-gray-800 rounded px-2 py-1">
+                        <div className="text-green-400 text-xs">
+                          Progress: {Math.round((executionStep / realtimeOutputLines.length) * 100)}%
+                        </div>
+                      </div>
+                    )}
+                    
                     <pre className="text-green-400 font-mono text-sm leading-relaxed">
-{`╔══════════════════════════════════════════╗
+                      {isRunning ? (
+                        <motion.div>
+                          {outputLines.map((line, index) => (
+                            <motion.div
+                              key={index}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className={line.includes('✓') || line.includes('🎯') || line.includes('✅') ? 'text-yellow-400' : ''}
+                            >
+                              {line}
+                            </motion.div>
+                          ))}
+                          <motion.span
+                            className="inline-block w-2 h-4 bg-green-400 ml-1"
+                            animate={{ opacity: [1, 0, 1] }}
+                            transition={{ duration: 0.8, repeat: Infinity }}
+                          />
+                        </motion.div>
+                      ) : (
+                        <code>{`╔══════════════════════════════════════════╗
 ║        METODE DEKOMPOSISI LU GAUSS       ║
 ║     Solusi Sistem Persamaan Linier      ║
 ║              Kelompok 5                  ║
 ╚══════════════════════════════════════════╝
 
-🚀 MENJALANKAN CONTOH DEFAULT
-==============================
+🚀 Klik tombol "Demo + Grafik" untuk menjalankan program secara realtime!
 
-Matriks A:
-[      2,      1,      1 ]
-[      4,      3,      3 ]
-[      8,      7,      9 ]
+📊 Fitur Realtime:
+• Output program muncul bertahap (seperti eksekusi asli)
+• Grafik konvergensi diperbarui seiring progress
+• Performance analysis berdasarkan step eksekusi
+• Visual feedback dengan indikator running
 
-Vektor b: [ 4, 10, 24 ]
+💡 Simulasi akan menampilkan:
+✓ Proses dekomposisi LU step-by-step
+✓ Eliminasi Gauss dengan pivoting
+✓ Forward & backward substitution
+✓ Verifikasi solusi otomatis
+✓ Statistik performa realtime
 
-=== METODE DEKOMPOSISI LU GAUSS ===
-Memulai faktorisasi matriks A = LU
-
---- Eliminasi Kolom 1 ---
-Pivot: U[1][1] = 2
-Multiplier m[2][1] = 2
-Multiplier m[3][1] = 4
-
-Matriks setelah eliminasi kolom 1:
-[   2.000,   1.000,   1.000 ]
-[   0.000,   1.000,   1.000 ]
-[   0.000,   3.000,   5.000 ]
-
---- Eliminasi Kolom 2 ---
-Pivot: U[2][2] = 1
-Multiplier m[3][2] = 3
-
-Matriks setelah eliminasi kolom 2:
-[   2.000,   1.000,   1.000 ]
-[   0.000,   1.000,   1.000 ]
-[   0.000,   0.000,   2.000 ]
-
-✓ Dekomposisi LU berhasil!
-
-=== HASIL DEKOMPOSISI ===
-
-Matriks L (Lower Triangular):
-[   1.000,   0.000,   0.000 ]
-[   2.000,   1.000,   0.000 ]
-[   4.000,   3.000,   1.000 ]
-
-Matriks U (Upper Triangular):
-[   2.000,   1.000,   1.000 ]
-[   0.000,   1.000,   1.000 ]
-[   0.000,   0.000,   2.000 ]
-
-📊 GRAFIK REALTIME AKTIF - Menampilkan:
-• Konvergensi error vs iterasi
-• Performance analysis berdasarkan ukuran matriks
-• Memory usage monitoring
-• CPU utilization tracking
-
-=== PENYELESAIAN SISTEM PERSAMAAN ===
-Vektor b setelah permutasi:
-[   4.000,  10.000,  24.000 ]
-
---- Forward Substitution: Ly = Pb ---
-y[1] = 4
-y[2] = 2
-y[3] = 2
-
---- Backward Substitution: Ux = y ---
-x[3] = 1
-x[2] = 1
-x[1] = 1
-
-🎯 SOLUSI AKHIR:
-x = [   1.0000,   1.0000,   1.0000 ]
-
-✅ VERIFIKASI (Ax = b):
-Baris 1: 4 ≈ 4
-Baris 2: 10 ≈ 10
-Baris 3: 24 ≈ 24
-
-📈 STATISTIK REALTIME:
-• Total waktu eksekusi: 0.125ms
-• Memory usage: 1.2KB
-• Operasi floating point: 27
-• Accuracy: 99.99%
-
-📋 MENU UTAMA:
-1. Jalankan Contoh Default
-2. Input Manual
-3. Tampilkan Grafik Realtime
-4. Export Data ke CSV
-5. Keluar
-Pilihan: _`}
+Tekan tombol "Demo + Grafik" di header untuk memulai! 🚀`}</code>
+                      )}
                     </pre>
                   </div>
+                  
+                  {!isRunning && (
+                    <div className="mt-4 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                      <p className="text-blue-700 font-medium">
+                        💡 Tips: Klik tombol "Demo + Grafik" di bagian header untuk melihat simulasi eksekusi program C++ secara realtime!
+                      </p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
