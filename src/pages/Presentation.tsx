@@ -11,6 +11,7 @@ import BackgroundAnimation from '@/components/presentation/BackgroundAnimation';
 const Presentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(false);
+  const [direction, setDirection] = useState(0);
 
   const slides = [
     {
@@ -206,25 +207,58 @@ const Presentation = () => {
     let interval: NodeJS.Timeout;
     if (isAutoPlay) {
       interval = setInterval(() => {
+        setDirection(1);
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 7000);
+      }, 8000);
     }
     return () => clearInterval(interval);
   }, [isAutoPlay, slides.length]);
 
   const nextSlide = () => {
+    setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   const prevSlide = () => {
+    setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   const goToSlide = (index: number) => {
+    setDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
   };
 
   const getCurrentSlide = () => slides[currentSlide];
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.8,
+      rotateY: direction > 0 ? 45 : -45,
+      z: -200,
+      filter: "blur(10px)"
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+      z: 0,
+      filter: "blur(0px)"
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.8,
+      rotateY: direction < 0 ? 45 : -45,
+      z: -200,
+      filter: "blur(10px)"
+    })
+  };
 
   const renderSlideContent = (slide: any) => {
     switch (slide.type) {
@@ -270,27 +304,63 @@ const Presentation = () => {
         onToggleAutoPlay={() => setIsAutoPlay(!isAutoPlay)}
       />
 
-      {/* Main Slide Content */}
+      {/* Main Slide Content with Enhanced Morph Transitions */}
       <div className="relative z-10 flex-1 flex items-center justify-center p-4 min-h-[calc(100vh-200px)]">
-        <motion.div className="w-full max-w-6xl">
-          <AnimatePresence mode="wait">
+        <motion.div className="w-full max-w-6xl perspective-1000">
+          <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 0.9, rotateY: 30, z: -100 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0, z: 0 }}
-              exit={{ opacity: 0, scale: 0.9, rotateY: -30, z: -100 }}
-              transition={{ 
-                duration: 0.8, 
-                type: "spring", 
-                stiffness: 100,
-                ease: "easeInOut"
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.6 },
+                scale: { duration: 0.4 },
+                rotateY: { duration: 0.8, ease: "easeInOut" },
+                filter: { duration: 0.5 }
+              }}
+              style={{
+                transformStyle: "preserve-3d"
               }}
             >
-              <Card className="bg-white/95 backdrop-blur-2xl border-2 border-blue-200/50 shadow-2xl min-h-[500px] md:min-h-[600px] overflow-hidden">
-                <CardContent className="p-6 md:p-12">
-                  {renderSlideContent(getCurrentSlide())}
-                </CardContent>
-              </Card>
+              <motion.div
+                whileHover={{ 
+                  scale: 1.02,
+                  rotateX: 2,
+                  rotateY: 2,
+                  transition: { duration: 0.3 }
+                }}
+                className="transform-gpu"
+              >
+                <Card className="bg-white/95 backdrop-blur-2xl border-2 border-blue-200/50 shadow-2xl min-h-[500px] md:min-h-[600px] overflow-hidden relative">
+                  {/* Card Glow Effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-lg"
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3],
+                      scale: [1, 1.02, 1]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  
+                  <CardContent className="p-6 md:p-12 relative z-10">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3, duration: 0.8 }}
+                    >
+                      {renderSlideContent(getCurrentSlide())}
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </motion.div>
           </AnimatePresence>
         </motion.div>
