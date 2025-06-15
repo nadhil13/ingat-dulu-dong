@@ -47,15 +47,16 @@ const CoverSlide = ({ title, subtitle, content }: CoverSlideProps) => {
             '0 0 30px rgba(59, 130, 246, 0.5)'
           ]
         }}
+        style={{ backgroundSize: '200% 100%' }}
+        initial={{ opacity: 0, y: -50, scale: 0.8 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ 
+          duration: 1.2, 
+          ease: "easeOut",
           scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
           backgroundPosition: { duration: 5, repeat: Infinity },
           textShadow: { duration: 3, repeat: Infinity }
         }}
-        style={{ backgroundSize: '200% 100%' }}
-        initial={{ opacity: 0, y: -50, scale: 0.8 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
       >
         {title.split(' ').map((word, index) => (
           <motion.span
