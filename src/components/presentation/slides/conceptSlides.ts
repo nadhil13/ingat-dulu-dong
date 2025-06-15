@@ -68,12 +68,16 @@ export const conceptSlides = [
     details: [
       "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y₁, y₂, ..., yₙ",
       "Dimulai dari y₁ = b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya.",
-      "Rumus umum: yᵢ = (bᵢ - Σⱼ₌₁ⁱ⁻¹ lᵢⱼ × yⱼ) untuk i = 1, 2, ..., n"
+      "Rumus umum untuk forward substitution:",
+      "y₁ = b₁",
+      "y₂ = b₂ - L₂₁y₁", 
+      "y₃ = b₃ - L₃₁y₁ - L₃₂y₂",
+      "yᵢ = bᵢ - Σⱼ₌₁ⁱ⁻¹ Lᵢⱼyⱼ untuk i = 1,2,...,n"
     ],
     matrixExample: {
       description: "Sistem persamaan Ly = b",
       matrices: {
-        "L×y=b": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
+        "L×y=b": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ L₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ Lₙ₁  Lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
       }
     },
     type: "forward-substitution"
@@ -85,7 +89,10 @@ export const conceptSlides = [
     details: [
       "Setelah y diperoleh, kita selesaikan Ux=y.",
       "Karena U adalah matriks segitiga atas, kita dapat menemukan solusi x secara berurutan dari xₙ, xₙ₋₁, ..., x₁.",
-      "Rumus umum: xᵢ = (yᵢ - Σⱼ₌ᵢ₊₁ⁿ uᵢⱼ × xⱼ) / uᵢᵢ untuk i = n, n-1, ..., 1"
+      "Rumus umum untuk backward substitution:",
+      "xₙ = yₙ / Uₙₙ",
+      "xₙ₋₁ = (yₙ₋₁ - Uₙ₋₁,ₙxₙ) / Uₙ₋₁,ₙ₋₁",
+      "xᵢ = (yᵢ - Σⱼ₌ᵢ₊₁ⁿ Uᵢⱼxⱼ) / Uᵢᵢ untuk i = n, n-1, ..., 1"
     ],
     imageSlot: {
       description: "Gambar matriks sistem Ux=y akan ditempatkan di sini",
