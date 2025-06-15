@@ -1,4 +1,3 @@
-
 export const conceptSlides = [
   {
     id: 3,
@@ -64,14 +63,15 @@ export const conceptSlides = [
   {
     id: 7,
     title: "Menyelesaikan Ly=b",
-    content: "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y₁, y₂, ..., yₙ",
+    content: "Isi:",
     details: [
-      "Dimulai dari y₁ = b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya."
+      "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y_1, y_2, ..., y_n",
+      "Dimulai dari y_1=b_1, kemudian substitusikan ke baris kedua untuk mendapatkan y_2, dan seterusnya."
     ],
     matrixExample: {
-      description: "Forward Substitution: Ly = b",
+      description: "",
       matrices: {
-        "Ly = b": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
+        "": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
       }
     },
     type: "forward-substitution"
