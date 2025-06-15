@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp, BarChart3 } from 'lucide-react';
@@ -25,10 +24,13 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
               Konvergensi Error (Realtime)
               {isRunning && (
                 <motion.div 
-                  className="ml-2 w-3 h-3 bg-green-500 rounded-full"
+                  className="ml-2 flex items-center"
                   animate={{ opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
-                />
+                >
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-1" />
+                  <span className="text-xs text-green-600 font-medium">LIVE</span>
+                </motion.div>
               )}
             </CardTitle>
           </CardHeader>
@@ -41,10 +43,12 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
                     dataKey="iteration" 
                     stroke="#3b82f6"
                     tick={{ fontSize: 12 }}
+                    label={{ value: 'Iterasi', position: 'insideBottom', offset: -5 }}
                   />
                   <YAxis 
                     stroke="#3b82f6"
                     tick={{ fontSize: 12 }}
+                    label={{ value: 'Error', angle: -90, position: 'insideLeft' }}
                   />
                   <Tooltip 
                     contentStyle={{ 
@@ -52,6 +56,10 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
                       border: '1px solid #3b82f6',
                       borderRadius: '8px'
                     }}
+                    formatter={(value: any, name: string) => [
+                      typeof value === 'number' ? value.toFixed(6) : value,
+                      name
+                    ]}
                   />
                   <Legend />
                   <Line 
@@ -61,6 +69,7 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
                     strokeWidth={3}
                     dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
                     name="Error"
+                    animationDuration={300}
                   />
                   <Line 
                     type="monotone" 
@@ -69,16 +78,19 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
                     strokeWidth={3}
                     dot={{ fill: '#f59e0b', strokeWidth: 2, r: 4 }}
                     name="Residual"
+                    animationDuration={300}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <p className="text-sm text-gray-600 mt-4">
-              {isRunning 
-                ? "📊 Grafik sedang diperbarui secara realtime berdasarkan eksekusi program..." 
-                : "Grafik menunjukkan konvergensi error dan residual selama proses iterasi LU decomposition."
-              }
-            </p>
+            <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+              <p className="text-sm text-blue-700">
+                {isRunning 
+                  ? `📊 Grafik diperbarui secara realtime berdasarkan eksekusi matriks ${convergenceData[0]?.matrixSize || 3}x${convergenceData[0]?.matrixSize || 3}...` 
+                  : "Grafik menunjukkan konvergensi error dan residual selama proses iterasi LU decomposition."
+                }
+              </p>
+            </div>
           </CardContent>
         </Card>
       </motion.div>
@@ -95,10 +107,13 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
               Performance Analysis
               {isRunning && (
                 <motion.div 
-                  className="ml-2 w-3 h-3 bg-orange-500 rounded-full"
+                  className="ml-2 flex items-center"
                   animate={{ opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
-                />
+                >
+                  <div className="w-2 h-2 bg-orange-500 rounded-full mr-1" />
+                  <span className="text-xs text-orange-600 font-medium">ACTIVE</span>
+                </motion.div>
               )}
             </CardTitle>
           </CardHeader>
@@ -111,10 +126,12 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
                     dataKey="matrixSize" 
                     stroke="#3b82f6"
                     tick={{ fontSize: 12 }}
+                    label={{ value: 'Ukuran Matriks', position: 'insideBottom', offset: -5 }}
                   />
                   <YAxis 
                     stroke="#3b82f6"
                     tick={{ fontSize: 12 }}
+                    label={{ value: 'Waktu (ms)', angle: -90, position: 'insideLeft' }}
                   />
                   <Tooltip 
                     contentStyle={{ 
@@ -122,35 +139,46 @@ const GraphsTab = ({ convergenceData, performanceData, isRunning }: GraphsTabPro
                       border: '1px solid #3b82f6',
                       borderRadius: '8px'
                     }}
+                    formatter={(value: any, name: string) => [
+                      typeof value === 'number' ? value.toFixed(3) + ' ms' : value,
+                      name
+                    ]}
                   />
                   <Legend />
                   <Bar 
                     dataKey="luTime" 
                     fill="#3b82f6" 
-                    name="LU Decomposition (ms)"
+                    name="LU Decomposition"
                     radius={[4, 4, 0, 0]}
                   />
                   <Bar 
                     dataKey="forwardTime" 
                     fill="#10b981" 
-                    name="Forward Sub (ms)"
+                    name="Forward Substitution"
                     radius={[4, 4, 0, 0]}
                   />
                   <Bar 
                     dataKey="backwardTime" 
                     fill="#f59e0b" 
-                    name="Backward Sub (ms)"
+                    name="Backward Substitution"
                     radius={[4, 4, 0, 0]}
                   />
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <p className="text-sm text-gray-600 mt-4">
-              {isRunning 
-                ? "🔄 Data performa sedang dianalisis berdasarkan eksekusi program realtime..." 
-                : "Analisis performa menunjukkan waktu eksekusi untuk berbagai ukuran matriks."
-              }
-            </p>
+            <div className="mt-4 p-3 bg-orange-50 rounded-lg">
+              <p className="text-sm text-orange-700">
+                {isRunning 
+                  ? `⚡ Analisis performa sedang berjalan berdasarkan input pengguna realtime...` 
+                  : "Analisis performa menunjukkan waktu eksekusi untuk berbagai ukuran matriks."
+                }
+              </p>
+              {performanceData.some(item => item.isActive) && (
+                <p className="text-xs text-green-600 mt-1 font-medium">
+                  🎯 Matriks aktif: {performanceData.find(item => item.isActive)?.matrixSize}
+                </p>
+              )}
+            </div>
           </CardContent>
         </Card>
       </motion.div>
