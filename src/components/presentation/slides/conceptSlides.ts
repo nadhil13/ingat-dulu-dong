@@ -1,4 +1,3 @@
-
 export const conceptSlides = [
   {
     id: 3,
@@ -70,11 +69,9 @@ export const conceptSlides = [
       "Dimulai dari y₁=b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya."
     ],
     matrixExample: {
-      description: "Contoh Forward Substitution 3×3",
+      description: "Forward Substitution: Ly = b",
       matrices: {
-        "L": "⎡  1   0   0 ⎤\n⎢  2   1   0 ⎥\n⎣  4   3   1 ⎦",
-        "y": "⎡ y₁ ⎤\n⎢ y₂ ⎥\n⎣ y₃ ⎦",
-        "b": "⎡  5 ⎤\n⎢ 11 ⎥\n⎣ 13 ⎦"
+        "L×y = b": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
       }
     },
     type: "forward-substitution"
