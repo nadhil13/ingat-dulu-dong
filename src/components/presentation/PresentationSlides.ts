@@ -18,99 +18,122 @@ export const presentationSlides = [
   },
   {
     id: 3,
-    title: "Pendahuluan: Apa itu Dekomposisi LU?",
-    content: "Konsep Dasar Dekomposisi LU",
+    title: "Pendahuluan",
+    content: "Konsep dasar tentang sistem persamaan linear dan metode penyelesaiannya",
     details: [
-      "Dekomposisi LU adalah sebuah metode untuk menyelesaikan sistem persamaan linier Ax = b",
-      "Metode ini bekerja dengan memfaktorkan atau menguraikan matriks koefisien A yang non-singular menjadi dua matriks:",
-      "L: Matriks segitiga bawah (Lower triangular)",
-      "U: Matriks segitiga atas (Upper triangular)",
-      "Sehingga diperoleh persamaan: A = LU"
+      "Sistem Persamaan Linear (SPL) adalah kumpulan persamaan linear yang saling berkaitan",
+      "Bentuk umum SPL: Ax = b, dimana A adalah matriks koefisien, x adalah vektor variabel, dan b adalah vektor konstanta",
+      "Metode penyelesaian SPL meliputi eliminasi Gauss, eliminasi Gauss-Jordan, dan dekomposisi matriks",
+      "Dekomposisi LU adalah salah satu metode yang efisien untuk menyelesaikan SPL, terutama untuk sistem yang berukuran besar",
+      "Metode ini memecah matriks A menjadi dua matriks segitiga: L (Lower) dan U (Upper)"
     ],
     type: "intro"
   },
   {
     id: 4,
-    title: "Bentuk Matriks L dan U",
-    content: "Mengenal Matriks L dan U",
+    title: "Apa itu Dekomposisi LU?",
+    content: "Pemahaman fundamental tentang faktorisasi matriks LU",
     details: [
-      "Matriks L memiliki elemen diagonal bernilai 1, elemen di atas diagonal bernilai 0, dan elemen di bawah diagonal berisi faktor pengali dari eliminasi Gauss",
-      "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0",
-      "Contoh: A = [[a₁₁, a₁₂, a₁₃], [a₂₁, a₂₂, a₂₃], [a₃₁, a₃₂, a₃₃]] = [[1, 0, 0], [l₂₁, 1, 0], [l₃₁, l₃₂, 1]] × [[u₁₁, u₁₂, u₁₃], [0, u₂₂, u₂₃], [0, 0, u₃₃]] = LU"
+      "Dekomposisi LU adalah proses memfaktorkan matriks A menjadi perkalian dua matriks: A = LU",
+      "L adalah matriks segitiga bawah (Lower triangular) dengan elemen diagonal = 1",
+      "U adalah matriks segitiga atas (Upper triangular) hasil eliminasi Gauss",
+      "Tujuan: mengubah sistem Ax = b menjadi dua sistem yang lebih mudah diselesaikan",
+      "Langkah penyelesaian: Ly = b (substitusi maju), kemudian Ux = y (substitusi mundur)"
     ],
-    type: "matrix"
+    type: "definition"
   },
   {
     id: 5,
     title: "Mengapa Menggunakan Dekomposisi LU?",
-    content: "Tujuan dan Manfaat",
+    content: "Keunggulan dan manfaat metode dekomposisi LU",
     details: [
-      "Tujuan utama adalah untuk mengubah satu sistem persamaan yang kompleks (Ax = b) menjadi dua sistem persamaan yang lebih mudah diselesaikan",
-      "Prosesnya:",
-      "1. Mulai dengan Ax = b",
-      "2. Substitusi A dengan LU, menjadi LUx = b",
-      "3. Misalkan Ux = y",
-      "4. Maka, kita mendapatkan dua persamaan: Ly = b dan Ux = y"
+      "Efisiensi komputasi: sekali dekomposisi dilakukan, dapat digunakan untuk multiple RHS",
+      "Stabilitas numerik yang baik dengan pivoting",
+      "Mengurangi operasi floating point dibanding metode eliminasi langsung",
+      "Mudah diimplementasikan dalam program komputer",
+      "Cocok untuk sistem persamaan berukuran besar",
+      "Memungkinkan analisis sensitivitas dan perhitungan determinan matriks"
     ],
     type: "benefits"
   },
   {
     id: 6,
-    title: "Langkah Penyelesaian SPL dengan Dekomposisi LU",
-    content: "Algoritma Penyelesaian",
+    title: "Algoritma Dekomposisi LU",
+    content: "Langkah-langkah sistematis dalam melakukan dekomposisi LU",
     details: [
-      "Langkah 1: Dekomposisi - Faktorkan matriks A menjadi matriks L dan U",
-      "Langkah 2: Substitusi Maju - Selesaikan persamaan Ly = b untuk mendapatkan vektor y",
-      "Langkah 3: Substitusi Mundur - Selesaikan persamaan Ux = y untuk mendapatkan solusi akhir, yaitu vektor x"
+      "1. Inisialisasi: buat matriks L sebagai matriks identitas dan U sebagai salinan matriks A",
+      "2. Untuk setiap kolom k dari 1 hingga n-1:",
+      "   - Hitung multiplier: l[i,k] = u[i,k] / u[k,k] untuk i > k",
+      "   - Simpan multiplier di matriks L",
+      "   - Lakukan eliminasi: u[i,j] = u[i,j] - l[i,k] * u[k,j]",
+      "3. Hasil: matriks L (segitiga bawah) dan U (segitiga atas)",
+      "4. Verifikasi: pastikan L × U = A"
     ],
-    type: "steps"
+    type: "algorithm"
   },
   {
     id: 7,
-    title: "Langkah 2: Teknik Penyulihan Maju (Forward Substitution)",
-    content: "Menyelesaikan Ly = b",
+    title: "Contoh Perhitungan Manual",
+    content: "Implementasi step-by-step dekomposisi LU dengan matriks 3×3",
     details: [
-      "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y₁, y₂, ..., yₙ",
-      "Matriks dalam bentuk: [[1, 0, ..., 0], [l₂₁, 1, ..., 0], [..., ..., ..., ...], [lₙ₁, lₙ₂, ..., 1]] × [y₁, y₂, ..., yₙ] = [b₁, b₂, ..., bₙ]",
-      "Dimulai dari y₁ = b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya"
+      "Diberikan matriks: A = [[2, 1, 1], [4, 3, 3], [8, 7, 9]]",
+      "Langkah 1 - Eliminasi kolom 1:",
+      "  l₂₁ = 4/2 = 2, l₃₁ = 8/2 = 4",
+      "  Baris 2: [4, 3, 3] - 2×[2, 1, 1] = [0, 1, 1]",
+      "  Baris 3: [8, 7, 9] - 4×[2, 1, 1] = [0, 3, 5]",
+      "Langkah 2 - Eliminasi kolom 2:",
+      "  l₃₂ = 3/1 = 3",
+      "  Baris 3: [0, 3, 5] - 3×[0, 1, 1] = [0, 0, 2]"
     ],
-    type: "forward"
+    type: "example"
   },
   {
     id: 8,
-    title: "Langkah 3: Teknik Penyulihan Mundur (Backward Substitution)",
-    content: "Menyelesaikan Ux = y",
+    title: "Hasil Dekomposisi",
+    content: "Matriks L dan U yang diperoleh dari contoh perhitungan",
     details: [
-      "Setelah y diperoleh, kita selesaikan Ux = y",
-      "Karena U adalah matriks segitiga atas, kita dapat menemukan solusi x secara berurutan dari xₙ, xₙ₋₁, ..., x₁",
-      "Matriks dalam bentuk: [[u₁₁, u₁₂, ..., u₁ₙ], [0, u₂₂, ..., u₂ₙ], [..., ..., ..., ...], [0, 0, ..., uₙₙ]] × [x₁, x₂, ..., xₙ] = [y₁, y₂, ..., yₙ]",
-      "Dimulai dari xₙ = yₙ/uₙₙ, kemudian substitusikan ke baris di atasnya untuk mendapatkan xₙ₋₁, dan seterusnya"
+      "Matriks L (Lower triangular):",
+      "L = [[1, 0, 0], [2, 1, 0], [4, 3, 1]]",
+      "Matriks U (Upper triangular):",
+      "U = [[2, 1, 1], [0, 1, 1], [0, 0, 2]]",
+      "Verifikasi: L × U = [[2, 1, 1], [4, 3, 3], [8, 7, 9]] = A ✓",
+      "Dekomposisi berhasil dan siap untuk penyelesaian SPL"
     ],
-    type: "backward"
+    type: "result"
   },
   {
     id: 9,
-    title: "Pembentukan L dan U: Metode LU Gauss",
-    content: "Bagaimana Cara Mendapatkan L dan U?",
+    title: "Penyelesaian SPL dengan LU",
+    content: "Menggunakan hasil dekomposisi untuk menyelesaikan sistem persamaan",
     details: [
-      "Metode LU Gauss menggunakan prinsip dasar eliminasi Gauss",
-      "Prosesnya:",
-      "1. Matriks U diperoleh dari hasil akhir proses eliminasi Gauss pada matriks A",
-      "2. Matriks L dibentuk dari faktor-faktor pengali (mᵢⱼ) yang digunakan selama proses eliminasi"
+      "Sistem: Ax = b, dengan b = [5, 11, 21]",
+      "Substitusi maju (Ly = b):",
+      "  y₁ = 5",
+      "  y₂ = 11 - 2(5) = 1", 
+      "  y₃ = 21 - 4(5) - 3(1) = -2",
+      "Substitusi mundur (Ux = y):",
+      "  x₃ = -2/2 = -1",
+      "  x₂ = 1 - 1(-1) = 2",
+      "  x₁ = (5 - 1(2) - 1(-1))/2 = 2",
+      "Solusi: x = [2, 2, -1]"
     ],
-    type: "formation"
+    type: "solution"
   },
   {
     id: 10,
-    title: "Algoritma Metode LU Gauss",
-    content: "Langkah-langkah Faktorisasi",
+    title: "Pivoting dalam Dekomposisi LU",
+    content: "Penanganan masalah pivot nol dan peningkatan akurasi numerik",
     details: [
-      "1. Inisialisasi: Nyatakan A sebagai IA (I adalah matriks identitas). Matriks I akan menjadi L dan A akan menjadi U",
-      "2. Eliminasi: Lakukan eliminasi Gauss pada matriks A. Untuk setiap operasi baris, misalnya Rᵢ ← Rᵢ - mᵢⱼRⱼ, lakukan hal berikut:",
-      "3. Simpan Pengali: Simpan nilai pengali mᵢⱼ pada posisi (i, j) di matriks L",
-      "4. Hasil Akhir: Setelah semua proses eliminasi selesai, matriks A akan menjadi matriks U (segitiga atas), dan matriks I akan menjadi matriks L (segitiga bawah dengan diagonal 1)"
+      "Masalah: pembagian dengan nol ketika elemen diagonal = 0",
+      "Solusi: Partial Pivoting - tukar baris untuk mendapatkan pivot terbesar",
+      "Algoritma pivoting:",
+      "  1. Cari elemen terbesar di kolom pivot",
+      "  2. Tukar baris jika diperlukan",
+      "  3. Update matriks permutasi P",
+      "Hasil: PA = LU (dengan P adalah matriks permutasi)",
+      "Keuntungan: stabilitas numerik yang lebih baik dan menghindari overflow"
     ],
-    type: "algorithm"
+    type: "pivoting"
   },
   {
     id: 11,
