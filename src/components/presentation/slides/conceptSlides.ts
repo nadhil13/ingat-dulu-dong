@@ -1,3 +1,4 @@
+
 export const conceptSlides = [
   {
     id: 3,
@@ -62,17 +63,18 @@ export const conceptSlides = [
   },
   {
     id: 7,
-    title: "Algoritma Dekomposisi LU",
-    content: "Langkah-langkah sistematis dalam melakukan dekomposisi LU",
+    title: "Menyelesaikan Ly=b",
+    content: "Isi:",
     details: [
-      "1. Inisialisasi: buat matriks L sebagai matriks identitas dan U sebagai salinan matriks A",
-      "2. Untuk setiap kolom k dari 1 hingga n-1:",
-      "   - Hitung multiplier: l[i,k] = u[i,k] / u[k,k] untuk i > k",
-      "   - Simpan multiplier di matriks L",
-      "   - Lakukan eliminasi: u[i,j] = u[i,j] - l[i,k] * u[k,j]",
-      "3. Hasil: matriks L (segitiga bawah) dan U (segitiga atas)",
-      "4. Verifikasi: pastikan L × U = A"
+      "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y_1,y_2,...,y_n",
+      "Dimulai dari y_1=b_1, kemudian substitusikan ke baris kedua untuk mendapatkan y_2, dan seterusnya."
     ],
-    type: "algorithm"
+    matrixExample: {
+      description: "",
+      matrices: {
+        "": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
+      }
+    },
+    type: "forward-substitution"
   }
 ];
