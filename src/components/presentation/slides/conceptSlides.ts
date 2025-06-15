@@ -64,15 +64,16 @@ export const conceptSlides = [
   {
     id: 7,
     title: "Menyelesaikan Ly=b",
-    content: "Isi:",
+    content: "Forward Substitution - Substitusi Maju",
     details: [
-      "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y_1,y_2,...,y_n",
-      "Dimulai dari y_1=b_1, kemudian substitusikan ke baris kedua untuk mendapatkan y_2, dan seterusnya."
+      "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y₁, y₂, ..., yₙ",
+      "Dimulai dari y₁ = b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya.",
+      "Rumus umum: yᵢ = (bᵢ - Σⱼ₌₁ⁱ⁻¹ lᵢⱼ × yⱼ) untuk i = 1, 2, ..., n"
     ],
     matrixExample: {
-      description: "",
+      description: "Sistem persamaan Ly = b",
       matrices: {
-        "": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
+        "L×y=b": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
       }
     },
     type: "forward-substitution"
