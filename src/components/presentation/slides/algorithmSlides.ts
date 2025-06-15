@@ -13,6 +13,14 @@ export const algorithmSlides = [
       "3. Hasil: matriks L (segitiga bawah) dan U (segitiga atas)",
       "4. Verifikasi: pastikan L × U = A"
     ],
+    matrixExample: {
+      description: "Contoh Input dan Output Algoritma",
+      matrices: {
+        Input: "⎡ 2  1  1 ⎤\n⎢ 4  3  3 ⎥\n⎣ 8  7  9 ⎦",
+        L: "⎡ 1  0  0 ⎤\n⎢ 2  1  0 ⎥\n⎣ 4  3  1 ⎦",
+        U: "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  0  2 ⎦"
+      }
+    },
     type: "algorithm"
   },
   {
@@ -29,6 +37,14 @@ export const algorithmSlides = [
       "Hasil: PA = LU (dengan P adalah matriks permutasi)",
       "Keuntungan: stabilitas numerik yang lebih baik dan menghindari overflow"
     ],
+    matrixExample: {
+      description: "Contoh Masalah Pivot dan Solusinya",
+      matrices: {
+        "Masalah": "⎡ 0  1  2 ⎤\n⎢ 3  1  1 ⎥\n⎣ 1  2  3 ⎦",
+        "Setelah Pivoting": "⎡ 3  1  1 ⎤\n⎢ 0  1  2 ⎥\n⎣ 1  2  3 ⎦",
+        "P": "⎡ 0  1  0 ⎤\n⎢ 1  0  0 ⎥\n⎣ 0  0  1 ⎦"
+      }
+    },
     type: "pivoting"
   },
   {

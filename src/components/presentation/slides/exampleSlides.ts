@@ -14,6 +14,14 @@ export const exampleSlides = [
       "  l₃₂ = 3/1 = 3",
       "  Baris 3: [0, 3, 5] - 3×[0, 1, 1] = [0, 0, 2]"
     ],
+    matrixExample: {
+      description: "Tahap Eliminasi Bertahap",
+      matrices: {
+        "Awal": "⎡ 2  1  1 ⎤\n⎢ 4  3  3 ⎥\n⎣ 8  7  9 ⎦",
+        "Setelah Langkah 1": "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  3  5 ⎦",
+        "Setelah Langkah 2": "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  0  2 ⎦"
+      }
+    },
     type: "example"
   },
   {
@@ -28,6 +36,14 @@ export const exampleSlides = [
       "Verifikasi: L × U = [[2, 1, 1], [4, 3, 3], [8, 7, 9]] = A ✓",
       "Dekomposisi berhasil dan siap untuk penyelesaian SPL"
     ],
+    matrixExample: {
+      description: "Hasil Akhir Dekomposisi LU",
+      matrices: {
+        L: "⎡ 1  0  0 ⎤\n⎢ 2  1  0 ⎥\n⎣ 4  3  1 ⎦",
+        U: "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  0  2 ⎦",
+        "L×U": "⎡ 2  1  1 ⎤\n⎢ 4  3  3 ⎥\n⎣ 8  7  9 ⎦"
+      }
+    },
     type: "result"
   },
   {
@@ -46,6 +62,14 @@ export const exampleSlides = [
       "  x₁ = (5 - 1(2) - 1(-1))/2 = 2",
       "Solusi: x = [2, 2, -1]"
     ],
+    matrixExample: {
+      description: "Langkah Penyelesaian SPL",
+      matrices: {
+        "Ly = b": "⎡ 1  0  0 ⎤ ⎡y₁⎤   ⎡ 5 ⎤\n⎢ 2  1  0 ⎥ ⎢y₂⎥ = ⎢11 ⎥\n⎣ 4  3  1 ⎦ ⎣y₃⎦   ⎣21 ⎦",
+        "Ux = y": "⎡ 2  1  1 ⎤ ⎡x₁⎤   ⎡ 5 ⎤\n⎢ 0  1  1 ⎥ ⎢x₂⎥ = ⎢ 1 ⎥\n⎣ 0  0  2 ⎦ ⎣x₃⎦   ⎣-2 ⎦",
+        "Solusi": "x = ⎡ 2 ⎤\n    ⎢ 2 ⎥\n    ⎣-1 ⎦"
+      }
+    },
     type: "solution"
   },
   {
@@ -58,6 +82,14 @@ export const exampleSlides = [
       "Eliminasi baris 2 dan 3",
       "Hasil setelah eliminasi kolom 1"
     ],
+    matrixExample: {
+      description: "Eliminasi Kolom Pertama",
+      matrices: {
+        "Step 0": "⎡ 2  1  1 ⎤\n⎢ 4  3  3 ⎥\n⎣ 8  7  9 ⎦",
+        "Multiplier": "m₂₁ = 2\nm₃₁ = 4",
+        "Step 1": "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  3  5 ⎦"
+      }
+    },
     type: "example1"
   },
   {
@@ -70,6 +102,14 @@ export const exampleSlides = [
       "Hasil akhir: L dan U terbentuk",
       "Verifikasi: L × U = A"
     ],
+    matrixExample: {
+      description: "Eliminasi Kolom Kedua",
+      matrices: {
+        "Step 1": "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  3  5 ⎦",
+        "Multiplier": "m₃₂ = 3",
+        "Final U": "⎡ 2  1  1 ⎤\n⎢ 0  1  1 ⎥\n⎣ 0  0  2 ⎦"
+      }
+    },
     type: "example2"
   }
 ];
