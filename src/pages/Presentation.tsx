@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Home, Users, Target, BookOpen, Zap, ArrowRight, ArrowDown, Play, Pause } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Home, Users, Target, BookOpen, Zap, ArrowRight, ArrowDown, Play, Pause, Camera, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Presentation = () => {
@@ -22,9 +21,9 @@ const Presentation = () => {
       id: 2,
       title: "Anggota Kelompok",
       content: [
-        "1. Anggota Kelompok 1 - Leader (NIM: 12345678)",
-        "2. Anggota Kelompok 2 - Developer (NIM: 12345679)", 
-        "3. Anggota Kelompok 3 - Analyst (NIM: 12345680)"
+        { name: "Muhammad Nadhil Arsy Al-Wafi", role: "Leader", nim: "202331303" },
+        { name: "Nadila Kusuma Dewi", role: "Developer", nim: "202331035" }, 
+        { name: "Antonio Gerald Renjaan", role: "Analyst", nim: "202331289" }
       ],
       type: "team"
     },
@@ -274,7 +273,7 @@ const Presentation = () => {
               {slide.title}
             </motion.h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {slide.content.map((member: string, index: number) => (
+              {slide.content.map((member: any, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8, y: 50 }}
@@ -283,19 +282,117 @@ const Presentation = () => {
                   className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl border-2 border-blue-100 hover:shadow-2xl transition-all duration-500 group"
                   whileHover={{ scale: 1.05, y: -10 }}
                 >
+                  {/* Enhanced Circular Photo Container */}
                   <motion.div 
-                    className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold shadow-2xl relative overflow-hidden group-hover:shadow-3xl transition-shadow duration-300"
-                    whileHover={{ rotate: 5 }}
+                    className="relative w-40 h-40 mx-auto mb-6 group-hover:scale-110 transition-transform duration-500"
+                    whileHover={{ rotate: [0, -5, 5, 0] }}
+                    transition={{ duration: 0.6 }}
                   >
-                    {index + 1}
+                    {/* Animated Border Ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-1"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                    >
+                      <div className="w-full h-full rounded-full bg-white"></div>
+                    </motion.div>
+                    
+                    {/* Inner Circle for Photo */}
+                    <motion.div 
+                      className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white shadow-2xl overflow-hidden cursor-pointer group"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {/* Photo Upload Area */}
+                      <div className="w-full h-full flex flex-col items-center justify-center relative">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.5 + index * 0.2, type: "spring", stiffness: 200 }}
+                        >
+                          <Camera className="w-8 h-8 mb-2 opacity-90" />
+                        </motion.div>
+                        <motion.span 
+                          className="text-sm font-medium opacity-90"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 0.9 }}
+                          transition={{ delay: 0.7 + index * 0.2 }}
+                        >
+                          Foto
+                        </motion.span>
+                        
+                        {/* Floating Upload Icon */}
+                        <motion.div
+                          className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg text-blue-600"
+                          animate={{ 
+                            y: [0, -5, 0],
+                            scale: [1, 1.1, 1]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            delay: index * 0.5 
+                          }}
+                        >
+                          <Upload className="w-4 h-4" />
+                        </motion.div>
+                      </div>
+                    </motion.div>
                   </motion.div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{member}</h3>
-                  <div className="w-full h-28 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-500 text-sm hover:bg-gray-50 transition-colors duration-300 group-hover:border-blue-300">
-                    <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-2">
-                      <Users className="w-8 h-8 text-gray-400" />
-                    </div>
-                    <span className="text-xs font-medium">Placeholder Foto</span>
-                  </div>
+
+                  {/* Member Info with Enhanced Animations */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.9 + index * 0.2, duration: 0.6 }}
+                  >
+                    <motion.h3 
+                      className="text-xl font-bold text-gray-800 mb-2"
+                      whileHover={{ scale: 1.05, color: "#3B82F6" }}
+                    >
+                      {member.name}
+                    </motion.h3>
+                    
+                    <motion.div
+                      className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-sm font-medium mb-2 shadow-lg"
+                      whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                    >
+                      {member.role}
+                    </motion.div>
+                    
+                    <motion.p 
+                      className="text-gray-600 font-medium"
+                      whileHover={{ scale: 1.05, color: "#6B7280" }}
+                    >
+                      NIM: {member.nim}
+                    </motion.p>
+                  </motion.div>
+
+                  {/* Decorative Elements */}
+                  <motion.div
+                    className="absolute top-4 right-4 w-3 h-3 bg-blue-400 rounded-full opacity-60"
+                    animate={{ 
+                      scale: [1, 1.5, 1],
+                      opacity: [0.6, 1, 0.6]
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity,
+                      delay: index * 0.3 
+                    }}
+                  />
+                  <motion.div
+                    className="absolute bottom-4 left-4 w-2 h-2 bg-purple-400 rounded-full opacity-60"
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      opacity: [0.6, 1, 0.6]
+                    }}
+                    transition={{ 
+                      duration: 2.5, 
+                      repeat: Infinity,
+                      delay: index * 0.4 
+                    }}
+                  />
                 </motion.div>
               ))}
             </div>
