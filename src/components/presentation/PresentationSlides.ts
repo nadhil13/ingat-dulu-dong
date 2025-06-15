@@ -1,4 +1,3 @@
-
 export const presentationSlides = [
   {
     id: 1,
@@ -19,92 +18,97 @@ export const presentationSlides = [
   },
   {
     id: 3,
-    title: "Pendahuluan",
-    content: "Dekomposisi LU adalah faktorisasi matriks A menjadi perkalian dua matriks segitiga: A = LU",
+    title: "Pendahuluan: Apa itu Dekomposisi LU?",
+    content: "Konsep Dasar Dekomposisi LU",
     details: [
-      "L = Lower triangular matrix (matriks segitiga bawah)",
-      "U = Upper triangular matrix (matriks segitiga atas)",
-      "Metode ini sangat efisien untuk menyelesaikan SPL"
+      "Dekomposisi LU adalah sebuah metode untuk menyelesaikan sistem persamaan linier Ax = b",
+      "Metode ini bekerja dengan memfaktorkan atau menguraikan matriks koefisien A yang non-singular menjadi dua matriks:",
+      "L: Matriks segitiga bawah (Lower triangular)",
+      "U: Matriks segitiga atas (Upper triangular)",
+      "Sehingga diperoleh persamaan: A = LU"
     ],
     type: "intro"
   },
   {
     id: 4,
     title: "Bentuk Matriks L dan U",
-    content: "Struktur matriks setelah dekomposisi",
+    content: "Mengenal Matriks L dan U",
     details: [
-      "Matriks L: Elemen diagonal = 1, elemen atas diagonal = 0",
-      "Matriks U: Elemen bawah diagonal = 0",
-      "Hasil: A = L × U"
+      "Matriks L memiliki elemen diagonal bernilai 1, elemen di atas diagonal bernilai 0, dan elemen di bawah diagonal berisi faktor pengali dari eliminasi Gauss",
+      "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0",
+      "Contoh: A = [[a₁₁, a₁₂, a₁₃], [a₂₁, a₂₂, a₂₃], [a₃₁, a₃₂, a₃₃]] = [[1, 0, 0], [l₂₁, 1, 0], [l₃₁, l₃₂, 1]] × [[u₁₁, u₁₂, u₁₃], [0, u₂₂, u₂₃], [0, 0, u₃₃]] = LU"
     ],
     type: "matrix"
   },
   {
     id: 5,
-    title: "Tujuan dan Manfaat",
-    content: "Mengapa menggunakan Dekomposisi LU?",
+    title: "Mengapa Menggunakan Dekomposisi LU?",
+    content: "Tujuan dan Manfaat",
     details: [
-      "Efisiensi komputasi untuk SPL dengan multiple RHS",
-      "Stabilitas numerik yang baik",
-      "Dapat mendeteksi singular matrix",
-      "Basis untuk algoritma lanjutan"
+      "Tujuan utama adalah untuk mengubah satu sistem persamaan yang kompleks (Ax = b) menjadi dua sistem persamaan yang lebih mudah diselesaikan",
+      "Prosesnya:",
+      "1. Mulai dengan Ax = b",
+      "2. Substitusi A dengan LU, menjadi LUx = b",
+      "3. Misalkan Ux = y",
+      "4. Maka, kita mendapatkan dua persamaan: Ly = b dan Ux = y"
     ],
     type: "benefits"
   },
   {
     id: 6,
-    title: "Langkah Penyelesaian",
-    content: "3 Tahap Utama:",
+    title: "Langkah Penyelesaian SPL dengan Dekomposisi LU",
+    content: "Algoritma Penyelesaian",
     details: [
-      "1. Dekomposisi: A = LU",
-      "2. Forward Substitution: Ly = b", 
-      "3. Backward Substitution: Ux = y"
+      "Langkah 1: Dekomposisi - Faktorkan matriks A menjadi matriks L dan U",
+      "Langkah 2: Substitusi Maju - Selesaikan persamaan Ly = b untuk mendapatkan vektor y",
+      "Langkah 3: Substitusi Mundur - Selesaikan persamaan Ux = y untuk mendapatkan solusi akhir, yaitu vektor x"
     ],
     type: "steps"
   },
   {
     id: 7,
-    title: "Forward Substitution",
+    title: "Langkah 2: Teknik Penyulihan Maju (Forward Substitution)",
     content: "Menyelesaikan Ly = b",
     details: [
-      "Mulai dari baris pertama",
-      "y₁ = b₁/L₁₁",
-      "yᵢ = (bᵢ - Σ Lᵢⱼyⱼ)/Lᵢᵢ untuk j<i"
+      "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y₁, y₂, ..., yₙ",
+      "Matriks dalam bentuk: [[1, 0, ..., 0], [l₂₁, 1, ..., 0], [..., ..., ..., ...], [lₙ₁, lₙ₂, ..., 1]] × [y₁, y₂, ..., yₙ] = [b₁, b₂, ..., bₙ]",
+      "Dimulai dari y₁ = b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya"
     ],
     type: "forward"
   },
   {
     id: 8,
-    title: "Backward Substitution", 
+    title: "Langkah 3: Teknik Penyulihan Mundur (Backward Substitution)",
     content: "Menyelesaikan Ux = y",
     details: [
-      "Mulai dari baris terakhir",
-      "xₙ = yₙ/Uₙₙ",
-      "xᵢ = (yᵢ - Σ Uᵢⱼxⱼ)/Uᵢᵢ untuk j>i"
+      "Setelah y diperoleh, kita selesaikan Ux = y",
+      "Karena U adalah matriks segitiga atas, kita dapat menemukan solusi x secara berurutan dari xₙ, xₙ₋₁, ..., x₁",
+      "Matriks dalam bentuk: [[u₁₁, u₁₂, ..., u₁ₙ], [0, u₂₂, ..., u₂ₙ], [..., ..., ..., ...], [0, 0, ..., uₙₙ]] × [x₁, x₂, ..., xₙ] = [y₁, y₂, ..., yₙ]",
+      "Dimulai dari xₙ = yₙ/uₙₙ, kemudian substitusikan ke baris di atasnya untuk mendapatkan xₙ₋₁, dan seterusnya"
     ],
     type: "backward"
   },
   {
     id: 9,
-    title: "Pembentukan L dan U",
-    content: "Metode LU Gauss",
+    title: "Pembentukan L dan U: Metode LU Gauss",
+    content: "Bagaimana Cara Mendapatkan L dan U?",
     details: [
-      "Eliminasi Gauss dengan penyimpanan multiplier",
-      "Multiplier disimpan di posisi elemen yang dieliminasi",
-      "Menghasilkan L dan U secara bersamaan"
+      "Metode LU Gauss menggunakan prinsip dasar eliminasi Gauss",
+      "Prosesnya:",
+      "1. Matriks U diperoleh dari hasil akhir proses eliminasi Gauss pada matriks A",
+      "2. Matriks L dibentuk dari faktor-faktor pengali (mᵢⱼ) yang digunakan selama proses eliminasi"
     ],
     type: "formation"
   },
   {
     id: 10,
     title: "Algoritma Metode LU Gauss",
-    content: "Langkah-langkah implementasi:",
+    content: "Langkah-langkah Faktorisasi",
     details: [
-      "1. Inisialisasi: L = I, U = A",
-      "2. Untuk setiap kolom k:",
-      "   - Hitung multiplier: mᵢₖ = Uᵢₖ/Uₖₖ",
-      "   - Update baris: Uᵢⱼ = Uᵢⱼ - mᵢₖ × Uₖⱼ",
-      "   - Simpan: Lᵢₖ = mᵢₖ"
+      "1. Inisialisasi: Nyatakan A sebagai IA (I adalah matriks identitas). Matriks I akan menjadi L dan A akan menjadi U",
+      "2. Eliminasi: Lakukan eliminasi Gauss pada matriks A. Untuk setiap operasi baris, misalnya Rᵢ ← Rᵢ - mᵢⱼRⱼ, lakukan hal berikut:",
+      "3. Simpan Pengali: Simpan nilai pengali mᵢⱼ pada posisi (i, j) di matriks L",
+      "4. Hasil Akhir: Setelah semua proses eliminasi selesai, matriks A akan menjadi matriks U (segitiga atas), dan matriks I akan menjadi matriks L (segitiga bawah dengan diagonal 1)"
     ],
     type: "algorithm"
   },
