@@ -34,6 +34,10 @@ const OutputTab = ({ isRunning, outputLines, executionStep, totalLines }: Output
 
 Tekan tombol "Demo + Grafik" di header untuk memulai! 🚀`;
 
+  // Show executed output if we have any, otherwise show static content
+  const hasExecutedOutput = outputLines.length > 0;
+  const showExecutionContent = isRunning || hasExecutedOutput;
+
   return (
     <Card className="bg-white/95 backdrop-blur-2xl border-2 border-blue-200/50 shadow-2xl">
       <CardHeader className="pb-4">
@@ -50,6 +54,12 @@ Tekan tombol "Demo + Grafik" di header untuk memulai! 🚀`;
               <span className="text-sm font-medium">Executing...</span>
             </motion.div>
           )}
+          {!isRunning && hasExecutedOutput && (
+            <div className="ml-3 flex items-center text-blue-600">
+              <div className="w-2 h-2 bg-blue-500 rounded-full mr-2" />
+              <span className="text-sm font-medium">Completed</span>
+            </div>
+          )}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -63,7 +73,7 @@ Tekan tombol "Demo + Grafik" di header untuk memulai! 🚀`;
           )}
           
           <pre className="text-green-400 font-mono text-sm leading-relaxed">
-            {isRunning ? (
+            {showExecutionContent ? (
               <motion.div>
                 {outputLines.map((line, index) => (
                   <motion.div
@@ -76,11 +86,13 @@ Tekan tombol "Demo + Grafik" di header untuk memulai! 🚀`;
                     {line}
                   </motion.div>
                 ))}
-                <motion.span
-                  className="inline-block w-2 h-4 bg-green-400 ml-1"
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                />
+                {isRunning && (
+                  <motion.span
+                    className="inline-block w-2 h-4 bg-green-400 ml-1"
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                  />
+                )}
               </motion.div>
             ) : (
               <code>{staticOutput}</code>
@@ -88,10 +100,18 @@ Tekan tombol "Demo + Grafik" di header untuk memulai! 🚀`;
           </pre>
         </div>
         
-        {!isRunning && (
+        {!showExecutionContent && (
           <div className="mt-4 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
             <p className="text-blue-700 font-medium">
               💡 Tips: Klik tombol "Demo + Grafik" di bagian header untuk melihat simulasi eksekusi program C++ secara realtime!
+            </p>
+          </div>
+        )}
+
+        {!isRunning && hasExecutedOutput && (
+          <div className="mt-4 p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+            <p className="text-green-700 font-medium">
+              ✅ Program berhasil dijalankan! Output di atas menunjukkan hasil eksekusi terakhir.
             </p>
           </div>
         )}
