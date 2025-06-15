@@ -3,57 +3,64 @@ export const presentationSlides = [
     id: 1,
     title: "Metode Dekomposisi LU Gauss",
     subtitle: "Solusi Sistem Persamaan Linier (SPL) dengan Faktorisasi Matriks",
-    content: "Kelompok 5 - Metode Numerik",
+    content: "Metode Numerik",
+    additionalInfo: "(Area untuk Logo Universitas)",
     type: "cover"
   },
   {
     id: 2,
-    title: "Anggota Kelompok",
+    title: "Tim Presentasi",
     content: [
-      { name: "Muhammad Nadhil Arsy Al-Wafi", role: "Leader", nim: "202331303" },
-      { name: "Nadila Kusuma Dewi", role: "Developer", nim: "202331035" }, 
-      { name: "Antonio Gerald Renjaan", role: "Analyst", nim: "202331289" }
+      { name: "Nama Mahasiswa 1", role: "Anggota Tim", nim: "NIM" },
+      { name: "Nama Mahasiswa 2", role: "Anggota Tim", nim: "NIM" }, 
+      { name: "Nama Mahasiswa 3", role: "Anggota Tim", nim: "NIM" }
     ],
+    note: "(Isi dengan daftar nama dan NIM anggota kelompok Anda)",
     type: "team"
   },
   {
     id: 3,
-    title: "Pendahuluan",
-    content: "Konsep dasar tentang sistem persamaan linear dan metode penyelesaiannya",
+    title: "Konsep Dasar Dekomposisi LU",
+    content: "Pemahaman fundamental tentang dekomposisi LU untuk sistem persamaan linier",
     details: [
-      "Sistem Persamaan Linear (SPL) adalah kumpulan persamaan linear yang saling berkaitan",
-      "Bentuk umum SPL: Ax = b, dimana A adalah matriks koefisien, x adalah vektor variabel, dan b adalah vektor konstanta",
-      "Metode penyelesaian SPL meliputi eliminasi Gauss, eliminasi Gauss-Jordan, dan dekomposisi matriks",
-      "Dekomposisi LU adalah salah satu metode yang efisien untuk menyelesaikan SPL, terutama untuk sistem yang berukuran besar",
-      "Metode ini memecah matriks A menjadi dua matriks segitiga: L (Lower) dan U (Upper)"
-    ],
-    type: "intro"
-  },
-  {
-    id: 4,
-    title: "Apa itu Dekomposisi LU?",
-    content: "Pemahaman fundamental tentang faktorisasi matriks LU",
-    details: [
-      "Dekomposisi LU adalah proses memfaktorkan matriks A menjadi perkalian dua matriks: A = LU",
-      "L adalah matriks segitiga bawah (Lower triangular) dengan elemen diagonal = 1",
-      "U adalah matriks segitiga atas (Upper triangular) hasil eliminasi Gauss",
-      "Tujuan: mengubah sistem Ax = b menjadi dua sistem yang lebih mudah diselesaikan",
-      "Langkah penyelesaian: Ly = b (substitusi maju), kemudian Ux = y (substitusi mundur)"
+      "Dekomposisi LU adalah sebuah metode untuk menyelesaikan sistem persamaan linier Ax=b.",
+      "Metode ini bekerja dengan memfaktorkan atau menguraikan matriks koefisien A yang non-singular menjadi dua matriks:",
+      "• L: Matriks segitiga bawah (Lower triangular).",
+      "• U: Matriks segitiga atas (Upper triangular).",
+      "Sehingga diperoleh persamaan: A=LU."
     ],
     type: "definition"
   },
   {
-    id: 5,
-    title: "Mengapa Menggunakan Dekomposisi LU?",
-    content: "Keunggulan dan manfaat metode dekomposisi LU",
+    id: 4,
+    title: "Mengenal Matriks L dan U",
+    content: "Karakteristik dan struktur matriks L dan U dalam dekomposisi",
     details: [
-      "Efisiensi komputasi: sekali dekomposisi dilakukan, dapat digunakan untuk multiple RHS",
-      "Stabilitas numerik yang baik dengan pivoting",
-      "Mengurangi operasi floating point dibanding metode eliminasi langsung",
-      "Mudah diimplementasikan dalam program komputer",
-      "Cocok untuk sistem persamaan berukuran besar",
-      "Memungkinkan analisis sensitivitas dan perhitungan determinan matriks"
+      "Matriks L memiliki elemen diagonal bernilai 1, elemen di atas diagonal bernilai 0, dan elemen di bawah diagonal berisi faktor pengali dari eliminasi Gauss.",
+      "Matriks U adalah hasil dari eliminasi Gauss pada matriks A, di mana semua elemen di bawah diagonalnya bernilai 0."
     ],
+    matrixExample: "A = [matriks 3x3] = [matriks L] × [matriks U] = LU",
+    matrixNote: "[SPACE UNTUK GAMBAR MATRIKS - Lampirkan gambar matriks dari slide 4]",
+    type: "matrix-explanation"
+  },
+  {
+    id: 5,
+    title: "Tujuan dan Manfaat",
+    content: "Keunggulan menggunakan metode dekomposisi LU",
+    details: [
+      "Tujuan utama adalah untuk mengubah satu sistem persamaan yang kompleks (Ax=b) menjadi dua sistem persamaan yang lebih mudah diselesaikan."
+    ],
+    process: {
+      title: "Prosesnya:",
+      steps: [
+        "1. Mulai dengan Ax=b.",
+        "2. Substitusi A dengan LU, menjadi LUx=b.",
+        "3. Misalkan Ux=y.",
+        "4. Maka, kita mendapatkan dua persamaan:",
+        "   • Ly=b",
+        "   • Ux=y"
+      ]
+    },
     type: "benefits"
   },
   {
