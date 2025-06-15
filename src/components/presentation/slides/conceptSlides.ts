@@ -1,3 +1,4 @@
+
 export const conceptSlides = [
   {
     id: 3,
@@ -83,11 +84,12 @@ export const conceptSlides = [
     content: "Backward Substitution - Substitusi Mundur",
     details: [
       "Setelah y diperoleh, kita selesaikan Ux=y.",
-      "Karena U adalah matriks segitiga atas, kita dapat menemukan solusi x secara berurutan dari xₙ, xₙ₋₁, ..., x₁."
+      "Karena U adalah matriks segitiga atas, kita dapat menemukan solusi x secara berurutan dari xₙ, xₙ₋₁, ..., x₁.",
+      "Rumus umum: xᵢ = (yᵢ - Σⱼ₌ᵢ₊₁ⁿ uᵢⱼ × xⱼ) / uᵢᵢ untuk i = n, n-1, ..., 1"
     ],
     imageSlot: {
-      description: "Gambar matriks Ux=y akan ditempatkan di sini",
-      placeholder: "Matrix image placeholder"
+      description: "Gambar matriks sistem Ux=y akan ditempatkan di sini",
+      placeholder: "Placeholder untuk Matriks Ux=y"
     },
     type: "backward-substitution"
   },
@@ -99,7 +101,8 @@ export const conceptSlides = [
       "Metode LU Gauss menggunakan prinsip dasar eliminasi Gauss.",
       "Prosesnya:",
       "1. Matriks U diperoleh dari hasil akhir proses eliminasi Gauss pada matriks A.",
-      "2. Matriks L dibentuk dari faktor-faktor pengali (mᵢⱼ) yang digunakan selama proses eliminasi."
+      "2. Matriks L dibentuk dari faktor-faktor pengali (mᵢⱼ) yang digunakan selama proses eliminasi.",
+      "3. Setiap faktor pengali yang digunakan untuk mengeliminasi elemen akan disimpan pada posisi yang sesuai di matriks L."
     ],
     type: "lu-method"
   }
