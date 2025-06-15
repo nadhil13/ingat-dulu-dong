@@ -46,5 +46,37 @@ export const conceptSlides = [
       "   • Ux=y (Backward substitution)"
     ],
     type: "benefits"
+  },
+  {
+    id: 6,
+    title: "Algoritma Penyelesaian",
+    content: "Langkah-langkah sistematis dalam menyelesaikan sistem LU",
+    details: [
+      "Langkah 1: Dekomposisi",
+      "• Faktorkan matriks A menjadi matriks L dan U.",
+      "",
+      "Langkah 2: Substitusi Maju",
+      "• Selesaikan persamaan Ly=b untuk mendapatkan vektor y.",
+      "",
+      "Langkah 3: Substitusi Mundur",
+      "• Selesaikan persamaan Ux=y untuk mendapatkan solusi akhir, yaitu vektor x."
+    ],
+    type: "algorithm-steps"
+  },
+  {
+    id: 7,
+    title: "Menyelesaikan Ly=b",
+    content: "Proses substitusi maju untuk menyelesaikan sistem segitiga bawah",
+    details: [
+      "Karena L adalah matriks segitiga bawah, kita dapat dengan mudah menemukan nilai y secara berurutan dari y₁, y₂, ..., yₙ",
+      "Dimulai dari y₁=b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya."
+    ],
+    matrixExample: {
+      description: "Forward Substitution: Ly = b",
+      matrices: {
+        "L×y = b": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
+      }
+    },
+    type: "forward-substitution"
   }
 ];
