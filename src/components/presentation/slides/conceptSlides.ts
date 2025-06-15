@@ -54,10 +54,8 @@ export const conceptSlides = [
     details: [
       "Langkah 1: Dekomposisi",
       "• Faktorkan matriks A menjadi matriks L dan U.",
-      "",
       "Langkah 2: Substitusi Maju",
       "• Selesaikan persamaan Ly=b untuk mendapatkan vektor y.",
-      "",
       "Langkah 3: Substitusi Mundur",
       "• Selesaikan persamaan Ux=y untuk mendapatkan solusi akhir, yaitu vektor x."
     ],
@@ -72,9 +70,11 @@ export const conceptSlides = [
       "Dimulai dari y₁=b₁, kemudian substitusikan ke baris kedua untuk mendapatkan y₂, dan seterusnya."
     ],
     matrixExample: {
-      description: "Forward Substitution: Ly = b",
+      description: "Contoh Forward Substitution 3×3",
       matrices: {
-        "L×y = b": "⎡  1   0  ...  0 ⎤ ⎡y₁⎤   ⎡b₁⎤\n⎢ l₂₁   1  ...  0 ⎥ ⎢y₂⎥ = ⎢b₂⎥\n⎢  ⋮   ⋮   ⋱   ⋮ ⎥ ⎢ ⋮⎥   ⎢ ⋮⎥\n⎣ lₙ₁  lₙ₂ ...  1 ⎦ ⎣yₙ⎦   ⎣bₙ⎦"
+        "L": "⎡  1   0   0 ⎤\n⎢  2   1   0 ⎥\n⎣  4   3   1 ⎦",
+        "y": "⎡ y₁ ⎤\n⎢ y₂ ⎥\n⎣ y₃ ⎦",
+        "b": "⎡  5 ⎤\n⎢ 11 ⎥\n⎣ 13 ⎦"
       }
     },
     type: "forward-substitution"
