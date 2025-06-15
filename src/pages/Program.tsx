@@ -1,13 +1,13 @@
-
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Code, FileText, TrendingUp, Play } from 'lucide-react';
+import { Code, FileText, TrendingUp, Play, Settings } from 'lucide-react';
 import { toast } from 'sonner';
 import ProgramHeader from '@/components/program/ProgramHeader';
 import CodeTab from '@/components/program/CodeTab';
 import ExplanationTab from '@/components/program/ExplanationTab';
 import GraphsTab from '@/components/program/GraphsTab';
 import OutputTab from '@/components/program/OutputTab';
+import InteractiveInputTab from '@/components/program/InteractiveInputTab';
 import { useProgramData } from '@/hooks/useProgramData';
 import { useProgramExecution } from '@/hooks/useProgramExecution';
 
@@ -17,7 +17,8 @@ const Program = () => {
     isRunning, 
     outputLines, 
     executionStep, 
-    handleRunDemo, 
+    handleRunDemo,
+    handleRunWithInput,
     totalLines 
   } = useProgramExecution(updateChartData);
 
@@ -361,8 +362,13 @@ int main() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <Tabs defaultValue="code" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 bg-white/20 backdrop-blur-2xl border border-white/30">
+          <Tabs defaultValue="input" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-5 bg-white/20 backdrop-blur-2xl border border-white/30">
+              <TabsTrigger value="input" className="data-[state=active]:bg-white data-[state=active]:text-blue-700 text-sm font-medium">
+                <Settings className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline">Input Dinamis</span>
+                <span className="sm:hidden">Input</span>
+              </TabsTrigger>
               <TabsTrigger value="code" className="data-[state=active]:bg-white data-[state=active]:text-blue-700 text-sm font-medium">
                 <Code className="w-4 h-4 mr-2" />
                 <span className="hidden sm:inline">Kode Program</span>
@@ -384,6 +390,13 @@ int main() {
                 <span className="sm:hidden">Demo</span>
               </TabsTrigger>
             </TabsList>
+
+            <TabsContent value="input">
+              <InteractiveInputTab 
+                onRunWithInput={handleRunWithInput}
+                isRunning={isRunning}
+              />
+            </TabsContent>
 
             <TabsContent value="code">
               <CodeTab cppCode={cppCode} />
