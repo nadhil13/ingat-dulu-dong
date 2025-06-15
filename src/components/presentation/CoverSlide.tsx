@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { BookOpen, Sparkles, Zap, Stars } from 'lucide-react';
 
@@ -9,36 +8,45 @@ interface CoverSlideProps {
 }
 
 const CoverSlide = ({ title, subtitle, content }: CoverSlideProps) => {
+  const iconComponents = [BookOpen, Sparkles, Zap, Stars];
+
   return (
     <div className="text-center space-y-8 min-h-[400px] flex flex-col justify-center relative overflow-hidden">
       {/* Floating Icons Background */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-blue-200/20"
-          style={{
-            left: `${20 + Math.random() * 60}%`,
-            top: `${20 + Math.random() * 60}%`,
-            fontSize: `${20 + Math.random() * 30}px`
-          }}
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, 360],
-            opacity: [0.2, 0.5, 0.2]
-          }}
-          transition={{
-            duration: 8 + i * 2,
-            repeat: Infinity,
-            delay: i * 1.5
-          }}
-        >
-          {[BookOpen, Sparkles, Zap, Stars][i % 4]({ className: "w-full h-full" })}
-        </motion.div>
-      ))}
+      {[...Array(6)].map((_, i) => {
+        const IconComponent = iconComponents[i % 4];
+        return (
+          <motion.div
+            key={i}
+            className="absolute text-blue-200/20"
+            style={{
+              left: `${20 + Math.random() * 60}%`,
+              top: `${20 + Math.random() * 60}%`,
+              fontSize: `${20 + Math.random() * 30}px`
+            }}
+            animate={{
+              y: [0, -30, 0],
+              rotate: [0, 360],
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              delay: i * 1.5
+            }}
+          >
+            <IconComponent className="w-full h-full" />
+          </motion.div>
+        );
+      })}
 
       <motion.h1 
         className="text-3xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-700 via-purple-700 to-blue-900 bg-clip-text text-transparent leading-tight relative z-10"
+        style={{ backgroundSize: '200% 100%' }}
+        initial={{ opacity: 0, y: -50, scale: 0.8 }}
         animate={{ 
+          opacity: 1, 
+          y: 0, 
           scale: [1, 1.03, 1],
           backgroundPosition: ['0%', '100%', '0%'],
           textShadow: [
@@ -47,9 +55,6 @@ const CoverSlide = ({ title, subtitle, content }: CoverSlideProps) => {
             '0 0 30px rgba(59, 130, 246, 0.5)'
           ]
         }}
-        style={{ backgroundSize: '200% 100%' }}
-        initial={{ opacity: 0, y: -50, scale: 0.8 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ 
           duration: 1.2, 
           ease: "easeOut",
@@ -81,6 +86,7 @@ const CoverSlide = ({ title, subtitle, content }: CoverSlideProps) => {
         ))}
       </motion.h1>
 
+      
       <motion.h2 
         className="text-lg md:text-2xl lg:text-3xl text-gray-700 font-semibold relative z-10"
         initial={{ opacity: 0, y: 30 }}
@@ -108,6 +114,7 @@ const CoverSlide = ({ title, subtitle, content }: CoverSlideProps) => {
         </motion.span>
       </motion.h2>
 
+      
       <motion.div 
         className="inline-flex items-center gap-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl relative overflow-hidden group cursor-pointer"
         initial={{ opacity: 0, scale: 0.6 }}
