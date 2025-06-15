@@ -1,4 +1,3 @@
-
 export const conceptSlides = [
   {
     id: 3,
@@ -77,5 +76,31 @@ export const conceptSlides = [
       }
     },
     type: "forward-substitution"
+  },
+  {
+    id: 8,
+    title: "Menyelesaikan Ux=y",
+    content: "Backward Substitution - Substitusi Mundur",
+    details: [
+      "Setelah y diperoleh, kita selesaikan Ux=y.",
+      "Karena U adalah matriks segitiga atas, kita dapat menemukan solusi x secara berurutan dari xₙ, xₙ₋₁, ..., x₁."
+    ],
+    imageSlot: {
+      description: "Gambar matriks Ux=y akan ditempatkan di sini",
+      placeholder: "Matrix image placeholder"
+    },
+    type: "backward-substitution"
+  },
+  {
+    id: 9,
+    title: "Bagaimana Cara Mendapatkan L dan U?",
+    content: "Metode LU Gauss menggunakan prinsip dasar eliminasi Gauss",
+    details: [
+      "Metode LU Gauss menggunakan prinsip dasar eliminasi Gauss.",
+      "Prosesnya:",
+      "1. Matriks U diperoleh dari hasil akhir proses eliminasi Gauss pada matriks A.",
+      "2. Matriks L dibentuk dari faktor-faktor pengali (mᵢⱼ) yang digunakan selama proses eliminasi."
+    ],
+    type: "lu-method"
   }
 ];

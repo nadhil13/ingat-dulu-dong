@@ -3,6 +3,7 @@ import CoverSlide from './CoverSlide';
 import TeamSlide from './TeamSlide';
 import DefaultSlide from './DefaultSlide';
 import MatrixSlide from './MatrixSlide';
+import ImageSlotSlide from './ImageSlotSlide';
 
 interface SlideRendererProps {
   slide: any;
@@ -26,6 +27,20 @@ const SlideRenderer = ({ slide }: SlideRendererProps) => {
           members={slide.content}
         />
       );
+
+    case 'backward-substitution':
+      // Special handling for slide with image slot
+      if (slide.imageSlot) {
+        return (
+          <ImageSlotSlide 
+            title={slide.title}
+            content={slide.content}
+            details={slide.details}
+            imageSlot={slide.imageSlot}
+          />
+        );
+      }
+      break;
 
     default:
       // Check if slide has matrix example
